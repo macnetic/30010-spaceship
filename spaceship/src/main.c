@@ -14,6 +14,7 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "ansi.h"
+#include "sound_driver.h"
 
 int main(void)
 {
