@@ -25,32 +25,23 @@ int main(void)
 
     uart_init(9600);
     //clrscr();
-//gotoxy(1,1);
+    //gotoxy(1,1);
     int8_t *buffer [512];
 
-    lcd_init();
+//    lcd_init();
+//    memset(buffer,0x00,512);
+//    lcdWriteString("First I wrote this line", buffer,1,0);
+//    lcdWriteString("Then this one", buffer,0,5);
+//    lcd_push_buffer(buffer);
 
-
-    memset(buffer,0x00,512);
-
-    lcdWriteString("Start press 2", buffer,0,0);
-
-    lcd_push_buffer(buffer);
-
-
-
-
-
-
-
-
-
-
+    printFix(expand(cos_lut(-5)));
+    printf("\t");
+    printFix(expand(cos_lut(5)));
+    printf("\n");
+//    printf("%d", -1000/512);
     while(1){
-
-
-    read_chars(out, length);
-    printf("%s", out);
+//    read_chars(out, length);
+//    printf("%s", out);
 //    for (int i = 0; i <= length; i++)
 //        printf("%02x ", out[i]);
     }

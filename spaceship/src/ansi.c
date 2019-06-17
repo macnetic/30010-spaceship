@@ -1,6 +1,8 @@
 #include "stdint.h"
 #include "stdio.h"
 #include "ansi.h"
+#include "30010_io.h"
+#include "lcd_driver.h"
 
 #define ESC 0x1B
 
