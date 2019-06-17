@@ -30,11 +30,11 @@ int main(void)
 
     memset(buffer,0x00,512);
 
-    lcdWriteString("Start press 1", buffer,0,0);
+    lcdWriteString("Start press 2", buffer,0,0);
 
     lcd_push_buffer(buffer);
 
-    lcdWriteString("Hej ", buffer,0,0);
+
 
 
 
