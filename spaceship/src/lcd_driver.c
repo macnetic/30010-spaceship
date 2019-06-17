@@ -25,29 +25,18 @@ uint8_t LCDsetup(uint8_t buffer){
 
     }
 
-    void lcdWriteString(char letter[], char *buffer, int16_t line, int16_t slice){
 
+void lcdWriteString(char str[], char *buffer, int16_t row, int16_t col) {
+	uint16_t i, j, k, len;
 
+	len = strlen(str);
 
-    int i,j;
-
-
-//   memset(buffer, 0x00, 512);
-
-    int length = strlen(letter);
-
-
-    for(i = 0; i<length;i++){
-            for(j=0; j<5; j++){
-
-
-                    buffer[(i*5+j)] = character_data[letter[i] -0x20][j];
-                    }
-                    if(((i+1)*5)>127);
-                    line++;
-
-
-
-            }
-
-    }
+	// Index characters in string
+	for (i=0; i < len; i++) {
+		// Index pixel columns in character
+		for (j=0; j<5; j++) {
+			k = (i + col) * 5 + 128 * row + j;
+			buffer[k] = character_data[str[i] - 0x20][j];
+		}
+	}
+}
