@@ -33,5 +33,28 @@ void init_led(void) {
     GPIOA->MODER   |=  (0x00000001 << (B_LED_PA9 * 2)); // Set mode register (0x00 - Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
 }
 
+/**
+ *   0x00 = off
+ *   0x01 = red
+ *   0x02 = green
+ *   0x03 = yellow
+ *   0x04 = blue
+ *   0x05 = magenta
+ *   0x06 = cyan
+ *   0x07 = white
+ */
 void set_led(uint8_t red, uint8_t green, uint8_t, blue) {
+     led_color = ~led_color;
+
+     /* Red */
+     GPIOB->ODR &= ~(0x01 << 4); // Reset Pin PB4
+     GPIOB->ODR |= ((led_color & 0x01) << (4-0)); // Set pin according to argument
+
+     /* Green */
+     GPIOC->ODR &= ~(0x01 << 7); // Reset Pin PC7
+     GPIOC->ODR |= ((led_color & 0x02) << (7-1)); // Set pin according to argument
+
+     /* Blue */
+     GPIOA->ODR &= ~(0x01 << 9); // Reset Pin PA9
+     GPIOA->ODR |= ((led_color & 0x04) << (9-2)); // Set pin according to argument
 }
