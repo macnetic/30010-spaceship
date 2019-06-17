@@ -1,6 +1,7 @@
 #include "sound_driver.h"
 
 init_sound(){
+    //Nogle ting skal fjernes da de ikke har så meget med lyden at gøre
     RCC->APB2ENR |= RCC_APB2Periph_TIM15; // Enable clock line to timer 2;
     TIM15->CR1   = 0x0000;
     TIM15->ARR   = 63999;  // Set auto reload value
