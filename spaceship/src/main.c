@@ -31,7 +31,7 @@ int main(void)
 
     memset(buffer,0x00,512);
 
-    lcdWriteString("Start press 2", buffer,0,0);
+    lcdWriteString("Start press 1", buffer,0,0);
 
     lcd_push_buffer(buffer);
 
@@ -49,6 +49,34 @@ int main(void)
 
     read_chars(out, length);
     printf("%s", out);
+
+    next = out[0];
+
+    if (next == 0x38){
+        y--;
+    } else if (next == 0x36) {
+        x++;
+    } else if (next == 0x32) {
+        y++;
+    } else if (next == 0x34) {
+        x--;
+    }
+     else if (next == 0x31) {
+        x--;
+        y++;
+    }
+     else if (next == 0x33) {
+        x++;
+        y++;
+    }
+     else if (next == 0x37) {
+        x--;
+        y--;
+    }
+     else if (next == 0x39) {
+        x++;
+        y--;
+    }
 //    for (int i = 0; i <= length; i++)
 //        printf("%02x ", out[i]);
     }
