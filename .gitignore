@@ -4,3 +4,5 @@ spaceship/bin/
 spaceship/obj/
 
 *.elay
+
+*.depend
