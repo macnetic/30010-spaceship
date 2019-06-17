@@ -12,8 +12,11 @@
 
 **********************************************************************/
 #include "stm32f30x_conf.h"
+#include "stdio.h"
 #include "30010_io.h"
 #include "ansi.h"
+#include "trig_lut.h"
+#include "lcd_driver.h"
 
 int main(void)
 {
