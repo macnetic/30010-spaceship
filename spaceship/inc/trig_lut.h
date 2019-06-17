@@ -22,9 +22,9 @@ typedef struct vector_t {
 } vector_t;
 
 // === LUT FUNCTIONS ===
-int32_t sin_lut(int32_t angle);
-int32_t cos_lut(int32_t angle);
+int32_t sin_lut(int32_t i);
+int32_t cos_lut(int32_t i);
 void initVector(vector_t* v, int32_t x, int32_t y);
-void rotateVector(vector_t* v, int32_t angle);
+void rotateVector(vector_t* v, int32_t i);
 
 #endif	// SIN_LUT_H

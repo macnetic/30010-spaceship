@@ -9,6 +9,10 @@
 // =====================================================================
 
 #include "trig_lut.h"
+
+#define FIX_14_SHIFT 14
+#define FIX_14_MULT(a,b) ((a * b) >> FIX_14_SHIFT)
+#define FIX_14_DIV(a,b)  ((a << FIX_14_SHIFT) / b)
 // -----------------------------------------------------------------------
 // SIN: a 512 long LUT of 16bit values in 2.14 format
 // sin(x*pi/256)
@@ -87,55 +91,38 @@ const signed short SIN[512]=
 	0xF9BA,0xFA82,0xFB4B,0xFC13,0xFCDC,0xFDA5,0xFE6E,0xFF37,
 };
 
+int32_t expand(int32_t a) {
+    return a << 2;
+}
+
+void printFix(int32_t i)
+// Print fixed point correctly in decimal form
+{
+    if ((i & 0x80000000) != 0)
+    {
+        printf("-");
+        i = ~i + 1;
+    }
+    printf("%ld.%04ld", i >> 16, 10000 * (uint32_t)(i & 0xFFFF) >> 16);
+}
+
 void initVector(vector_t * v, int32_t x, int32_t y) {
     (*v).x = x;
     (*v).y = y;
 }
 
-void rotateVector(vector_t * v, int32_t angle) {
-    // Shift input from 16.16 to 18.14 fixed point representation
-    (*v).x >>= 2;
-    (*v).y >>= 2;
-
+void rotateVector(vector_t * v, int32_t i) {
     // Compute rotated vector
-    (*v).x = ((*v).x * cos_lut(angle) - (*v).y * sin_lut(angle)) >> 14;
-    (*v).y = ((*v).x * sin_lut(angle) + (*v).y * cos_lut(angle)) >> 14;
-
-    // Convert back to 16.16 fixed point representation
-    (*v).x <<= 2;
-    (*v).y <<= 2;
+    v->x = FIX_14_MULT((v->x), cos_lut(i)) - FIX_14_MULT((v->x), sin_lut(i));
+    v->y = FIX_14_MULT((v->x), sin_lut(i)) + FIX_14_MULT((v->x), cos_lut(i));
 }
 
-int32_t sin_lut(int32_t angle) {
-    int32_t index;
-
-    if (angle < 0) {
-        index = -angle * SIN_SIZE / DEGREES;
-
-        // Ensure that index stays in range of LUT
-        index &= 511;
-        return -SIN[index];
-    } else {
-        index = angle * SIN_SIZE / DEGREES;
-
-        // Ensure that index stays in range of LUT
-        index &= 511;
-        return SIN[index];
-    }
+int32_t sin_lut(int32_t i) {
+    i %= 512;
+    if (i < 0) i+=512;
+    return SIN[i];
 }
 
-int32_t cos_lut(int32_t angle) {
-    int32_t index;
-
-    if (angle < 0) {
-        index = (-angle+90)*512/360;
-    } else {
-        index = (angle+90)*512/360;
-    }
-
-
-    // Ensure that index stays in range of LUT
-    return SIN[index & 511];
+int32_t cos_lut(int32_t i) {
+    return sin_lut(i+128);
 }
-
-
