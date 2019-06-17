@@ -21,19 +21,55 @@ int main(void)
     uint16_t length = 1;
     char out[length+1];
 
-    uart_init(9600);
+    uart_init(115200);
     //clrscr();
-//gotoxy(1,1);
-    int8_t *buffer [512];
+    //gotoxy(1,1);
+//    int8_t *buffer [512];
+//
+//    lcd_init();
+//
+//    memset(buffer,0x00,512);
+//
+//    lcdWriteString("Start press 1", buffer,0,0);
+//
+//    lcd_push_buffer(buffer);
 
-    lcd_init();
+    int x=0;
+    int y=0;
+    char next;
+
+    while(1){
 
 
-    memset(buffer,0x00,512);
+    read_chars(out, length);
+//    printf("%s", out);
+    next = out[0];
 
-    lcdWriteString("Start press 1", buffer,0,0);
-
-    lcd_push_buffer(buffer);
+    if (next == 0x38){
+        y--;
+    } else if (next == 0x36) {
+        x++;
+    } else if (next == 0x32) {
+        y++;
+    } else if (next == 0x34) {
+        x--;
+    }
+     else if (next == 0x31) {
+        x--;
+        y++;
+    }
+     else if (next == 0x33) {
+        x++;
+        y++;
+    }
+     else if (next == 0x37) {
+        x--;
+        y--;
+    }
+     else if (next == 0x39) {
+        x++;
+        y--;
+    }
 
 
 
@@ -77,6 +113,8 @@ int main(void)
         x++;
         y--;
     }
+    clrscr();
+    drawSpaceShip(x,y);
 //    for (int i = 0; i <= length; i++)
 //        printf("%02x ", out[i]);
     }
