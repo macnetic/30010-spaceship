@@ -2,3 +2,5 @@
 *.ebp
 spaceship/bin/
 spaceship/obj/
+
+*.elay
