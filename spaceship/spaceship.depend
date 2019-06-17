@@ -189,11 +189,53 @@
 	"stm32f30x_wwdg.h"
 	"stm32f30x_rcc.h"
 
-1560420348 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\main.c
+1560763274 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\main.c
 	"stm32f30x_conf.h"
+	"30010_io.h"
+	"ansi.h"
 
 1560420348 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\startup_stm32f30x.s
 
 1560420348 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\system_stm32f30x.c
 	"stm32f30x.h"
+
+1560420348 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\30010_io.c
+	"30010_io.h"
+
+1560420348 c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\inc\30010_io.h
+	"stm32f30x_conf.h"
+	<stdio.h>
+
+1560764104 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\ansi.c
+	"stdint.h"
+	"stdio.h"
+	"ansi.h"
+
+1560521084 c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\inc\ansi.h
+	<stdint.h>
+	<stdio.h>
+	<30010_io.h>
+
+1560763274 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\spaceship.c
+
+1560420348 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\trig_lut.c
+	"trig_lut.h"
+
+1560420348 c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\inc\trig_lut.h
+	<stdint.h>
+
+1560764124 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\led_driver.c
+	<stm32f30x_conf.h>
+	<led_driver.h>
+
+1560763274 c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\inc\led_driver.h
+	<stm32f30x_conf.h>
+
+1560764299 source:c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\src\timer2.c
+	"timer2.h"
+
+1560764298 c:\users\martin\desktop\programmeringsprojekt 31000\30010-spaceship\spaceship\inc\timer2.h
+	<stdint.h>
+	<stdio.h>
+	"30010_io.h"
 

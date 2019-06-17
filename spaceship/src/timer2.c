@@ -1,4 +1,4 @@
-#include <timer2.h>
+#include "timer2.h"
 
 /** Timer configuration **/
 void enable_timer2(void) {

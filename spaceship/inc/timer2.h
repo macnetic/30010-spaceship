@@ -1,5 +1,8 @@
 #ifndef _TIMER2_H_
 #define _TIMER2_H_
+#include <stdint.h>
+#include <stdio.h>
+#include "30010_io.h"
 
 /** Symbolic constant definitions **/
 #define TIM2_PSC 15 // Prescale so 100 Hz reload value fits in 16 bits
