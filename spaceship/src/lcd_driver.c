@@ -43,7 +43,7 @@ uint8_t LCDsetup(uint8_t buffer){
 
                     buffer[(i*5+j)] = character_data[letter[i] -0x20][j];
                     }
-                    if(((i+1)*5)>128);
+                    if(((i+1)*5)>127);
                     line++;
 
 

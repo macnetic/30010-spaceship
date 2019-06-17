@@ -21,10 +21,31 @@ int main(void)
     char out[length+1];
 
     uart_init(9600);
-    clrscr();
-    gotoxy(1,1);
+    //clrscr();
+//gotoxy(1,1);
+    int8_t *buffer [512];
+
+    lcd_init();
+
+
+    memset(buffer,0x00,512);
+
+    lcdWriteString("Start press 1", buffer,0,0);
+
+    lcd_push_buffer(buffer);
+
+    lcdWriteString("Hej ", buffer,0,0);
+
+
+
+
+
+
+
 
     while(1){
+
+
     read_chars(out, length);
     printf("%s", out);
 //    for (int i = 0; i <= length; i++)

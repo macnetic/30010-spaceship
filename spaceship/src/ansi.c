@@ -170,12 +170,24 @@ void window(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, char* title, uint8_t
 void read_chars(char out[], uint32_t n) {
     uint32_t i = 0;
     uart_clear();
+    uint8_t *buffer[512];
 
     while(i < n) {
         char next = uart_get_char();
         if (next != 0) {
             if (next == 0x0D) {
                 break;
+            }
+            if (next == 0x31){
+
+            memset(buffer, 0x00, 512);
+            lcdWriteString("Hej ", buffer,0,0);
+
+
+
+            lcd_push_buffer(buffer);
+
+
             }
             out[i] = next;
             i++;
