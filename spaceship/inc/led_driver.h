@@ -9,6 +9,6 @@
 
 /** Led driver functions **/
 void init_led(void);
-void set_led(uint8_t red, uint8_t green, uint8_t blue);
+void set_led(uint8_t led_color);
 
 #endif // _LED_DRIVER_H_

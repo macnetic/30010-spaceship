@@ -43,7 +43,7 @@ void init_led(void) {
  *   0x06 = cyan
  *   0x07 = white
  */
-void set_led(uint8_t red, uint8_t green, uint8_t blue) {
+void set_led(uint8_t led_color) {
      led_color = ~led_color;
 
      /* Red */
