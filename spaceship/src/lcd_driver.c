@@ -7,22 +7,14 @@
 #define ESC 0x1B
 
 uint8_t LCDsetup(uint8_t buffer){
-
-
-
     lcd_init();
 
     //lcd_reset();
-
     //lcd_transmit_byte();// only if you know what you are doing
-
-
 
     memset(buffer, 0x80, 512);
 
     lcd_push_buffer(buffer); //updates display
-
-
     }
 
 
