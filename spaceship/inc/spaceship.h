@@ -14,12 +14,9 @@
 #define MAX_ASTEROIDS 10
 #define MAX_ENEMIES 10
 #define MAX_PROJECTILES 100
+#define MAX_POWERUPS 10
 
-#define STATE_DELETED 0
-#define STATE_NOT_DELETED 1
-
-#define HIT 1
-#define NO_HIT 0
+#define GRAVITY_CONST
 
 typedef struct Entity {
     int32_t x, y;
@@ -48,12 +45,22 @@ typedef struct Projectile {
     int32_t damage;
 } Projectile;
 
+typedef struct Powerup {
+    Entity entity;
+    // what kind of powerup?
+} Powerup;
+
 void spawnPlayer(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t mass, int32_t hitpoints, int32_t ammunition);
-void spawnEnemy(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t damage);
+void spawnEnemy(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t mass, int32_t hitpoints);
 void spawnProjectile(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t damage);
 void spawnAsteroid(int32_t x, int32_t y, int32_t mass);
 
+void deleteEntity(Entity * ent);
+
 bool detectHit(Entity* ent1, Entity* ent2);
+
+void updateGame(void);
+void drawGame(void);
 
 void gravity(void);
 
