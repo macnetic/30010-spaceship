@@ -5,9 +5,3 @@
 #include "30010_io.h"
 #include "charset.h"
 #define ESC 0x1B
-
-int8_t currentScreen;
-int8_t currentOption;
-
-void invertLine(char *buffer, uint8_t index);
-void navigateMenu();
