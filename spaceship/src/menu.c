@@ -7,9 +7,9 @@
 #include "menu.h"
 #define ESC 0x1B
 
-void invertLine(char *buffer, uint8_t index){
-    uint8_t i;
+void invertLine(char buffer[], uint16_t index){
+    uint16_t i;
     for(i = 128*index; i < 128*(index+1); i++){
-        buffer[i] ^= 0xFF;
+        buffer[i] = ~(buffer[i]);
     }
 }

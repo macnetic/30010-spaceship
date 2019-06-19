@@ -9,5 +9,5 @@
 int8_t currentScreen;
 int8_t currentOption;
 
-void invertLine(char *buffer, uint8_t index);
+void invertLine(char buffer[], uint16_t index);
 void navigateMenu();
