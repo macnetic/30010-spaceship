@@ -20,3 +20,11 @@ void addUnderline(char buffer[], uint16_t line){
         buffer[i] |= 0x80;
     }
 }
+
+void addRightArrow(char buffer[], uint8_t row, uint8_t col){
+    uint16_t pos = col + 128*row;
+    buffer[pos]   = 0xFE;
+    buffer[pos+1] = 0x7C;
+    buffer[pos+2] = 0x38;
+    buffer[pos+3] = 0x10;
+}
