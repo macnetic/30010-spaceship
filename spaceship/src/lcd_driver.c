@@ -6,7 +6,7 @@
 #include "charset.h"
 #define ESC 0x1B
 
-uint8_t LCDsetup(uint8_t buffer){
+void LCDsetup(char buffer){
     lcd_init();
 
     //lcd_reset();
