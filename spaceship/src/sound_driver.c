@@ -43,3 +43,5 @@ setFreq(uint16_t freq) {
           TIM2->CCR3 = reload/2; // Set compare register
           TIM2->EGR |= 0x01;
 }
+
+//TODO: Lave funktion til at slå lyd til eller fra
