@@ -4,3 +4,4 @@
 int32_t PRESCALER_VALUE  = 9;
 void init_sound();
 void setFreq(uint16_t freq);
+void switchOnOff(); //TODO

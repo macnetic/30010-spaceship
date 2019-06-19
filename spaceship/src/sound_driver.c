@@ -44,4 +44,6 @@ setFreq(uint16_t freq) {
           TIM2->EGR |= 0x01;
 }
 
-//TODO: Lave funktion til at slå lyd til eller fra
+void switchOnOff(){
+    //TODO
+}

@@ -6,8 +6,9 @@
 #include "charset.h"
 #define ESC 0x1B
 
-int8_t currentScreen;
-int8_t currentOption;
+int8_t currentScreen;//TODO
+int8_t currentOption;//TODO
 
-void invertLine(char buffer[], uint16_t index);
-void navigateMenu();
+void invertLine(char buffer[], uint16_t line);
+void addUnderline(char buffer[], uint16_t line);
+void navigateMenu();//TODO
