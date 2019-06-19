@@ -10,9 +10,6 @@
 
 #include "trig_lut.h"
 
-#define FIX_14_SHIFT 14
-#define FIX_14_MULT(a,b) ((a * b) >> FIX_14_SHIFT)
-#define FIX_14_DIV(a,b)  ((a << FIX_14_SHIFT) / b)
 // -----------------------------------------------------------------------
 // SIN: a 512 long LUT of 16bit values in 2.14 format
 // sin(x*pi/256)

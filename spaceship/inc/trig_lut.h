@@ -6,9 +6,14 @@
 //
 // =====================================================================
 #include <stdint.h>
+#include <stdio.h>
 
 #ifndef TRIG_LUT_H
 #define TRIG_LUT_H
+
+#define FIX_14_SHIFT 14
+#define FIX_14_MULT(a,b) ((a * b) >> FIX_14_SHIFT)
+#define FIX_14_DIV(a,b)  ((a << FIX_14_SHIFT) / b)
 
 // === LUT SIZES ===
 #define SIN_SIZE 512
