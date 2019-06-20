@@ -38,7 +38,7 @@ void screen_main(char buffer[]){
     lcdWriteString("Help me",          buffer,2,0);
     lcdWriteString("Dance dance revolution!",  buffer,3,0);
 
-    lcd_push_buffer(buffer); //Update display
+    lcd_push_buffer((uint8_t*) buffer); //Update display
 }
 
 void screen_help(char buffer[]);
