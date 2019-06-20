@@ -1,6 +1,6 @@
 #include "sound_driver.h"
 
-init_sound(){
+void init_sound(){
     //Nogle ting skal fjernes da de ikke har så meget med lyden at gøre
     RCC->APB2ENR |= RCC_APB2Periph_TIM15; // Enable clock line to timer 2;
     TIM15->CR1   = 0x0000;
@@ -37,7 +37,7 @@ init_sound(){
       GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_1);
 }
 //Set sound frequency - reactivate when priscale var is moved
-setFreq(uint16_t freq) {
+void setFreq(uint16_t freq) {
           uint32_t reload = 64e6 / freq / (PRESCALER_VALUE + 1) - 1;
           TIM2->ARR  = reload; // Set auto reload value
           TIM2->CCR3 = reload/2; // Set compare register
