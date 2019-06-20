@@ -93,6 +93,54 @@ void screen_stageSelect(char buffer[]){
 
     lcd_push_buffer(buffer); //Update display
 
+    uint8_t i, d, n;
+    i = 0;
+    n = 0;
+    while(i < 2){ //Get max two digits
+        //TODO: Add black boxes
+        read_chars(input,1);
+        if(input[0] == 'b'){
+            //If player presses b, go back to main menu
+            nextScreen = 0;
+            break;
+        }
+        d = input[0] - '0'; //Get digit value of input
+        if(0 <= d && d <= 9){
+            //Write value to screen if input is correct
+            lcdWriteString(input,buffer,1,7 + i++);
+            n = 10 * n + d; //Since the loop runs a maximum of two times, the first value is multiplied by 10
+            lcd_push_buffer(buffer);
+        }
+        if(i >= 2){ //Only run this part if both numbers are entered
+            lcdWriteString("Play this stage?  (y/n)",buffer,2,1);
+            lcd_push_buffer(buffer);
+
+            int cont = 1; //Only exit loop when correct term is entered
+            while(cont == 1){
+                read_chars(input,1);
+                switch(input[0]){
+                    case 'y':
+                        /*TODO:
+                        Set flag to exit menu loop
+                        for now, just output to putty*/
+                        printf("Game started\n");
+                        cont = 0;
+                        break;
+                    case 'n':
+                        //Reset screen
+                        currentScreen = 0;
+                        cont = 0;
+                        break;
+                    case 'b':
+                        //Go back to main menu
+                        nextScreen = 0;
+                        cont = 0;
+                        break;
+                }
+            }
+        }
+    }
+/* Need testing before this is deleted
     read_chars(input,1);
     lcdWriteString(input,buffer,1,7);
     lcd_push_buffer(buffer);
@@ -102,5 +150,5 @@ void screen_stageSelect(char buffer[]){
 
     lcdWriteString("Play this stage?  (y/n)",buffer,2,1);
 
-    lcd_push_buffer(buffer);
+    lcd_push_buffer(buffer);*/
 }
