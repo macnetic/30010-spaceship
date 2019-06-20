@@ -170,10 +170,8 @@ void window(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, char* title, uint8_t
  * Reads n chars from UART and writes as string array to char array in argument
  */
 void read_chars(char out[], uint32_t n) {
-    int x,y;
     uint32_t i = 0;
     uart_clear();
-    uint8_t *buffer[512];
 
     while(i < n) {
         char next = uart_get_char();
