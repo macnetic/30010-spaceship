@@ -15,7 +15,10 @@ void navigator(char buffer[]){
             case 0:
                 screen_main(buffer);
                 break;
-            case 1:
+            case 2:
+                screen_stageSelect(buffer);
+                break;
+            case 3:
                 screen_help(buffer);
                 break;
         }
@@ -23,10 +26,15 @@ void navigator(char buffer[]){
 
     read_chars(input,1); //Wait for input for next screen
 
-    if(input[0] == 'h'){
-        nextScreen = 1;
-    }else{
-        nextScreen = 0;
+    switch(input[0]){
+        case '2':
+            nextScreen = 2;
+            break;
+        case '3':
+            nextScreen = 3;
+            break;
+        default:
+            nextScreen = 0;
     }
 }
 
@@ -76,4 +84,23 @@ void screen_help(char buffer[]){
     lcd_push_buffer(buffer); //Update display
 }
 
-void screen_stageSelect(char buffer[]);
+void screen_stageSelect(char buffer[]){
+    memset(buffer, 0x00, 512); //Clear screen
+
+    lcdWriteString("Enter stage # 01-99",buffer,0,0);
+    lcdWriteString("Stage:",buffer,1,0);
+    lcdWriteString("(b)ack",buffer,3,0);
+
+    lcd_push_buffer(buffer); //Update display
+
+    read_chars(input,1);
+    lcdWriteString(input,buffer,1,7);
+    lcd_push_buffer(buffer);
+    read_chars(input,1);
+    lcdWriteString(input,buffer,1,8);
+    lcd_push_buffer(buffer);
+
+    lcdWriteString("Play this stage?  (y/n)",buffer,2,1);
+
+    lcd_push_buffer(buffer);
+}
