@@ -69,6 +69,6 @@ void initGame(void);
 void updateGame(void);
 void drawGame(void);
 
-void gravity(void);
+void gravity(void); // TODO
 
 #endif // _SPACESHIP_H_
