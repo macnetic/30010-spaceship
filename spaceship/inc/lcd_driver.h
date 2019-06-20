@@ -10,6 +10,7 @@
 #define _LCD_H_
 
 void LCDsetup(char buffer[]);
-void lcdWriteString(char letter[], char buffer[], int16_t line, int16_t slice);
+void lcdWriteString(char letter[], char buffer[], int16_t row, int16_t col);
+void lcdWriteSymbol(uint8_t symbol, char buffer[], int16_t row, int16_t col);
 
 #endif /* _LCD_H_*/
