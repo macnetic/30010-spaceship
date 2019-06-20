@@ -23,8 +23,11 @@
 #include <spaceship.h>
 
 
+
 int main(void)
 {
+    uart_init(916000);
+
     initGame();
 
     while(1){
