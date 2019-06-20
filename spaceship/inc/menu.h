@@ -12,3 +12,4 @@ int8_t currentOption;//TODO
 void invertLine(char buffer[], uint16_t line);
 void addUnderline(char buffer[], uint16_t line);
 void navigateMenu();//TODO
+void addRightArrow(char buffer[], uint8_t row, uint8_t col);

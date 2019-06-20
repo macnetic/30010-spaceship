@@ -180,6 +180,7 @@ void read_chars(char out[], uint32_t n) {
         if (next != 0) {
             if (next == 0x0D) {
                 break;
+
             }
             out[i] = next;
             i++;

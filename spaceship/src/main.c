@@ -12,19 +12,22 @@
 
 **********************************************************************/
 #include "stm32f30x_conf.h"
-#include "stdio.h"
+#include <stdio.h>
+#include <stdint.h>
 #include "30010_io.h"
 #include "ansi.h"
 #include "sound_driver.h"
 #include "trig_lut.h"
 #include "lcd_driver.h"
+#include <wchar.h>
+
 
 int main(void)
 {
     uint16_t length = 1;
     char out[length+1];
 
-    uart_init(115200);
+    uart_init(916000);
     //clrscr();
     //gotoxy(1,1);
     int8_t *buffer [512];
@@ -44,88 +47,34 @@ int main(void)
 //    lcdWriteString("First I wrote this line", buffer,1,0);
 //    lcdWriteString("Then this one", buffer,0,5);
 //    lcd_push_buffer(buffer);
-    int x=0;
-    int y=0;
+    uint32_t x=10;
+    uint32_t y=10;
     char next;
-
-    while(1){
-
-
-    read_chars(out, length);
-//    printf("%s", out);
-    next = out[0];
-
-    if (next == 0x38){
-        y--;
-    } else if (next == 0x36) {
-        x++;
-    } else if (next == 0x32) {
-        y++;
-    } else if (next == 0x34) {
-        x--;
-    }
-     else if (next == 0x31) {
-        x--;
-        y++;
-    }
-     else if (next == 0x33) {
-        x++;
-        y++;
-    }
-     else if (next == 0x37) {
-        x--;
-        y--;
-    }
-     else if (next == 0x39) {
-        x++;
-        y--;
-    }
-
-
-
-
-
-
-
+    uint8_t heading = 0;
 
 
 
     while(1){
 
 
-    read_chars(out, length);
-    printf("%s", out);
 
-    next = out[0];
+    //gotoxy(x++,y++);
 
-    if (next == 0x38){
-        y--;
-    } else if (next == 0x36) {
-        x++;
-    } else if (next == 0x32) {
-        y++;
-    } else if (next == 0x34) {
-        x--;
-    }
-     else if (next == 0x31) {
-        x--;
-        y++;
-    }
-     else if (next == 0x33) {
-        x++;
-        y++;
-    }
-     else if (next == 0x37) {
-        x--;
-        y--;
-    }
-     else if (next == 0x39) {
-        x++;
-        y--;
-    }
+
+
+
+
+
+
+
+    heading += rotateSpaceship(heading);
+    heading %= 8;
+
     clrscr();
-    drawSpaceShip(x,y);
-//    for (int i = 0; i <= length; i++)
-//        printf("%02x ", out[i]);
+    drawSpaceShip(x,y,heading);
+
+
+
+
     }
 }
