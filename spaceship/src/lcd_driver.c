@@ -1,18 +1,18 @@
 #include "lcd_driver.h"
 
-void LCDsetup(char buffer){
+void LCDsetup(char buffer[]){
     lcd_init();
 
     //lcd_reset();
     //lcd_transmit_byte();// only if you know what you are doing
 
-    memset(buffer, 0x80, 512);
+    memset(&buffer, 0x80, 512);
 
-    lcd_push_buffer(buffer); //updates display
+    lcd_push_buffer(&buffer); //updates display
     }
 
 
-void lcdWriteString(char str[], char *buffer, int16_t row, int16_t col) {
+void lcdWriteString(char str[], char buffer[], int16_t row, int16_t col) {
 	uint16_t i, j, k, len;
 
 	len = strlen(str);

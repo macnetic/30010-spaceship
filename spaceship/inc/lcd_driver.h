@@ -6,10 +6,10 @@
 #include <charset.h>
 
 
-#ifndef _ANSI_H_
-#define _ANSI_H_
+#ifndef _LCD_H_
+#define _LCD_H_
 
-void LCDsetup(char buffer);
-void lcdWriteString(char letter[], char *buffer, int16_t line, int16_t slice);
+void LCDsetup(char buffer[]);
+void lcdWriteString(char letter[], char buffer[], int16_t line, int16_t slice);
 
-#endif /* _ANSI_H_*/
+#endif /* _LCD_H_*/
