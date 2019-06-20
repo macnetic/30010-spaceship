@@ -7,7 +7,7 @@
 #include "menu.h"
 #define ESC 0x1B
 
-<<<<<<< Updated upstream
+
 void invertLine(char buffer[], uint16_t line){
     uint16_t i;
     for(i = 128*line; i < 128*(line+1); i++){
@@ -29,6 +29,4 @@ void addRightArrow(char buffer[], uint8_t row, uint8_t col){
     buffer[pos+2] = 0x38;
     buffer[pos+3] = 0x10;
 }
-=======
 
->>>>>>> Stashed changes

@@ -2,6 +2,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <trig_lut.h>
+#include <figures.h>
+#include <ansi.h>
+#include <30010_io.h>
 
 #ifndef _SPACESHIP_H_
 #define _SPACESHIP_H_
@@ -19,15 +22,16 @@
 #define GRAVITY_CONST
 
 typedef struct Entity {
-    int32_t x, y;
+    uint32_t x, y;
     int32_t vx, vy;
-    int32_t w, h;
+    uint32_t w, h;
     bool isDeleted;
 } Entity;
 
 typedef struct Player {
     Entity entity;
-    int32_t mass, hitpoints, ammunition;
+    int32_t hitpoints;
+    uint32_t mass, ammunition, heading;
 } Player;
 
 typedef struct Enemy {
@@ -50,7 +54,7 @@ typedef struct Powerup {
     // what kind of powerup?
 } Powerup;
 
-void spawnPlayer(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t mass, int32_t hitpoints, int32_t ammunition);
+void spawnPlayer(uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t mass, int32_t hitpoints, uint32_t ammunition, uint32_t heading);
 void spawnEnemy(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t mass, int32_t hitpoints);
 void spawnProjectile(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t damage);
 void spawnAsteroid(int32_t x, int32_t y, int32_t mass);
@@ -59,6 +63,9 @@ void deleteEntity(Entity * ent);
 
 bool detectHit(Entity* ent1, Entity* ent2);
 
+void drawPlayer(Player* player);
+
+void initGame(void);
 void updateGame(void);
 void drawGame(void);
 

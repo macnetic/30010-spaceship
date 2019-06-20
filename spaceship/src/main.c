@@ -52,6 +52,8 @@ int main(void)
     char next;
     uint8_t heading = 0;
 
+    initGame();
+
 
 
     while(1){
@@ -65,13 +67,14 @@ int main(void)
 
 
 
-
-
-    heading += rotateSpaceship(heading);
-    heading %= 8;
-
     clrscr();
-    drawSpaceShip(x,y,heading);
+
+//    heading += rotateSpaceship(heading);
+//    heading %= 8;
+
+
+//    drawSpaceShip(x,y,heading);
+    drawGame();
 
 
 

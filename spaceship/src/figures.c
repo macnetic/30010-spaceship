@@ -7,6 +7,7 @@
 #include "charset.h"
 #include <wchar.h>
 #include <locale.h>
+//#include <spaceship.h>
 
 #define lowsmall 220
 #define highsmall 223
@@ -55,25 +56,25 @@ const static  char NE[] = {lowsmall,ESC,'[','C',lowsmall,highsmall,ESC,'[','B',E
                 };
 
 
-void drawSpaceShip(uint32_t x, uint32_t y, uint32_t heading){
-    fgcolor(2);
-
-    // C moves forward A moves up D moves back B moves down
-
-    gotoxy(x, y);
-    switch (heading) {
-        case 0: printf(N); break;
-        case 1: printf(NW); break;
-        case 2: printf(W); break;
-        case 3: printf(SW); break;
-        case 4: printf(S); break;
-        case 5: printf(SE); break;
-        case 6: printf(E); break;
-        case 7: printf(NE); break;
-    }
-
-//    printf("%c%c",44,44);
-}
+//void drawPlayer(Player* player){
+//    fgcolor(2);
+//
+//    // C moves forward A moves up D moves back B moves down
+//
+//    gotoxy(x, y);
+//    switch (player->heading) {
+//        case 0: printf(N); break;
+//        case 1: printf(NW); break;
+//        case 2: printf(W); break;
+//        case 3: printf(SW); break;
+//        case 4: printf(S); break;
+//        case 5: printf(SE); break;
+//        case 6: printf(E); break;
+//        case 7: printf(NE); break;
+//    }
+//
+////    printf("%c%c",44,44);
+//}
 
 void drawAsteroid(int x, int y){
 
@@ -110,9 +111,9 @@ uint8_t rotateSpaceship(uint8_t x, uint8_t y, uint8_t heading){
     }
     else if((next == 'W') || (next=='w')){
 
-        switch (heading) {
+       switch (heading) {
             case 0: y--; break;
-            case 1: {y--; x--; break;}
+            case 1: {y--; x--;} break;
             case 2: {x--; break;}
             case 3: {y++; x--; break;}
             case 4: {y++; break;}
@@ -122,11 +123,6 @@ uint8_t rotateSpaceship(uint8_t x, uint8_t y, uint8_t heading){
         }
     }
     else return 0;
-
-
-
-
-
 
 }
 
@@ -143,3 +139,5 @@ heart
 
 {0x0E,0x1F,0x3F,0x7E,0xFC} //left,
 {0x7E,0x3F,0x1F,0x0E,0x00} // right
+
+*/
