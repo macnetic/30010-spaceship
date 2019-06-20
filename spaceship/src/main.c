@@ -40,6 +40,19 @@ int main(void)
     //screen_main(&buffer);
     nextScreen = 0;
 
+    char buffer[512];
+    lcd_init();
+    memset(buffer, 0x00, 512);
+    lcd_push_buffer((uint8_t*) buffer);
+
+    char heart[] = {0x5f + 0x20, 0x60 + 0x20, '\0'};
+
+    lcdWriteString(heart, buffer, 0, 0);
+//    lcdWriteSymbol(95, buffer, 1, 0);
+//    lcdWriteSymbol(96, buffer, 1, 1);
+    lcd_push_buffer((uint8_t*) buffer);
+
+
     while(1){
         navigator(&buffer);
     }

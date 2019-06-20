@@ -166,8 +166,6 @@ void deleteEntity(Entity* ent) {
 void drawPlayer(Player* player){
     fgcolor(2);
 
-
-
     gotoxy(player->entity.x >> FIX_14_SHIFT, player->entity.y >> FIX_14_SHIFT);
     switch (player->heading) { //Redraws the character according to the heading.
         case 0: printf(N); break;
@@ -179,8 +177,6 @@ void drawPlayer(Player* player){
         case 6: printf(E); break;
         case 7: printf(NE); break;
     }
-
-
 }
 
 void initGame(void) {
