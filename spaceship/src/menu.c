@@ -7,6 +7,29 @@
 #include "menu.h"
 #define ESC 0x1B
 
+//Screen navigation
+void navigator(char buffer[]){
+    if(nextScreen != currentScreen){
+        currentScreen = nextScreen;
+        switch(nextScreen){
+            case 0:
+                screen_main(buffer);
+                break;
+            case 1:
+                screen_help(buffer);
+                break;
+        }
+    }
+
+    read_chars(input,1); //Wait for input for next screen
+
+    if(input[0] == 'h'){
+        nextScreen = 1;
+    }else{
+        nextScreen = 0;
+    }
+}
+
 void invertLine(char buffer[], uint16_t line){
     uint16_t i;
     for(i = 128*line; i < 128*(line+1); i++){
@@ -33,14 +56,24 @@ void addRightArrow(char buffer[], uint8_t row, uint8_t col){
 void screen_main(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
-    lcdWriteString("Start game",    buffer,0,0);
-    lcdWriteString("Select stage",  buffer,1,0);
-    lcdWriteString("Help me",          buffer,2,0);
-    lcdWriteString("Dance dance revolution!",  buffer,3,0);
+    lcdWriteString("(1) Start game",    buffer,0,0);
+    lcdWriteString("(2) Select stage",  buffer,1,0);
+    lcdWriteString("(3) Help",          buffer,2,0);
+    lcdWriteString("(4) Let's dance!",  buffer,3,0);
 
     lcd_push_buffer(buffer); //Update display
 }
 
-void screen_help(char buffer[]);
+void screen_help(char buffer[]){
+    memset(buffer, 0x00, 512); //Clear screen
+
+    lcdWriteString("bla bla bla", buffer,0,0); //Help text
+
+    lcdWriteString("(b)ack",buffer,3, 0);
+    lcdWriteString("1/X",   buffer,3,11);
+    lcdWriteString("(n)ext",buffer,3,19);
+
+    lcd_push_buffer(buffer); //Update display
+}
 
 void screen_stageSelect(char buffer[]);
