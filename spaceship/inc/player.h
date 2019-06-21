@@ -1,6 +1,9 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+// Standard library imports
+#include <stdlib.h>
+
 // Project imports
 #include <entity.h>
 #include <figures.h>
@@ -10,6 +13,9 @@
 // Player constants
 #define PLAYER_HITBOX_WIDTH 6
 #define PLAYER_HITBOX_HEIGHT 4
+#define PLAYER_VEL_SCALE 3
+#define PLAYER_MAX_X_VEL 2
+#define PLAYER_MAX_Y_VEL 1
 
 /*
  * typedef struct Player Player
@@ -32,6 +38,7 @@ typedef struct Player {
 void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t ammo, uint32_t heading, int32_t hp);
 
 void controlPlayer(Player* player);
+void keepPlayerInBounds(Player* player, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);
 
 void drawPlayerSprite(Player* player);
 void deletePlayerSprite(Player* player);

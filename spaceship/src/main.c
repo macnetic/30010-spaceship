@@ -86,7 +86,7 @@ int main(void)
     while(1){
 //        navigator(&buffer);
 
-        if (t.hs >= 5) {
+        if (t.hs >= 2) {
             updateGame();
 
             drawGame();

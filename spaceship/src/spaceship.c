@@ -100,9 +100,9 @@ void initGame(void) {
 
     // Draw window border
     fgcolor(15);
-    window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
+    window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "  SPACE INVADERS IN THE AIR - ON A FLYING SAUCER YOU CAN TAKE ME THERE ", 1);
 
-    spawnPlayer(&players[0], 10, 10, 0, 0, 0, 0);
+    spawnPlayer(&players[0], 200, 40, 0, 0, 0, 0);
 }
 
 /**
@@ -118,18 +118,13 @@ void initGame(void) {
 void updateGame(void) {
     for (uint16_t i = 0; i < MAX_PLAYERS; i++) {
         if (~players[i].entity.isDeleted) {
+            // Delete old player sprite
             deletePlayerSprite(&players[i]);
+
             controlPlayer(&players[i]);
 
-            if ((players[i].entity.x - players[i].entity.w / 2) <= (1 << FIX_14_SHIFT))
-                players[i].entity.x = (players[i].entity.w / 2) + (1 << FIX_14_SHIFT);
-            else if ((players[i].entity.x + players[i].entity.w / 2) > (GAME_WINDOW_WIDTH << FIX_14_SHIFT))
-                players[i].entity.x = (GAME_WINDOW_WIDTH - 1) << FIX_14_SHIFT;
-
-            if ((players[i].entity.y - players[i].entity.h / 2) < 1 << FIX_14_SHIFT)
-                players[i].entity.y = 2 << FIX_14_SHIFT;
-            if ((players[i].entity.y + players[i].entity.h / 2) >= (GAME_WINDOW_HEIGHT << FIX_14_SHIFT))
-                players[i].entity.y = (GAME_WINDOW_HEIGHT - 1) << FIX_14_SHIFT;
+            updateEntity(&players[i].entity);
+            keepPlayerInBounds(&players[i], 2, 2, GAME_WINDOW_WIDTH - 2, GAME_WINDOW_HEIGHT - 1);
         }
     }
 }

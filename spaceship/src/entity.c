@@ -30,6 +30,11 @@ void deleteEntity(Entity* ent) {
     ent->isDeleted = true;
 }
 
+void updateEntity(Entity* ent) {
+    ent->x += ent->vx;
+    ent->y += ent->vy;
+}
+
 /*
  * Function detectHit
  * ------------------

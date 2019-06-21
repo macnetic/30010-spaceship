@@ -20,7 +20,7 @@
  * isDeleted:   flag to keep track of whether a game entity is currently active in the game
  */
 typedef struct Entity {
-    uint32_t x, y;
+    int32_t x, y;
     int32_t vx, vy;
     uint32_t w, h;
     bool isDeleted;
@@ -29,6 +29,8 @@ typedef struct Entity {
 void spawnEntity(Entity* ent, uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t width, uint32_t height);
 
 void deleteEntity(Entity* ent);
+
+void updateEntity(Entity* ent);
 
 bool detectHit(Entity* ent_a, Entity* ent_b);
 
