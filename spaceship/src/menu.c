@@ -22,28 +22,6 @@ void navigator(char buffer[]){
     }
 }
 
-void invertLine(char buffer[], uint16_t line){
-    uint16_t i;
-    for(i = 128*line; i < 128*(line+1); i++){
-        buffer[i] ^= 0x7F;
-    }
-}
-
-void addUnderline(char buffer[], uint16_t line){
-    uint16_t i;
-    for(i = 128*line; i < 128*(line+1); i++){
-        buffer[i] |= 0x80;
-    }
-}
-
-void addRightArrow(char buffer[], uint8_t row, uint8_t col){
-    uint16_t pos = col + 128*row;
-    buffer[pos]   = 0xFE;
-    buffer[pos+1] = 0x7C;
-    buffer[pos+2] = 0x38;
-    buffer[pos+3] = 0x10;
-}
-
 //Different menu screens
 void screen_main(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
@@ -74,7 +52,7 @@ void screen_help(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
     lcdWriteString("(b)ack",buffer,3, 0);
-    lcdWriteString("/X",    buffer,3,12);
+    lcdWriteString("/3",    buffer,3,12);
     lcdWriteString("(n)ext",buffer,3,19);
 
     uint8_t helpPage = 1;
@@ -140,7 +118,6 @@ void screen_stageSelect(char buffer[]){
     i = 0;
     n = 0;
     while(i < 2){ //Get max two digits
-        //TODO: Add black boxes
         read_chars(input,1);
         if(input[0] == 'b'){
             //If player presses b, cancel out and go back to main menu

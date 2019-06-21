@@ -36,13 +36,24 @@ void lcdWriteSymbol(uint8_t symbol, char buffer[], int16_t row, int16_t col) {
     }
 }
 
-//void lcdWriteSymbol(uint16_t index, char buffer[], uint16_t row, uint16_t col) {
-//    uint16_t i, j, k;
-//    // Index characters in string
-//	i = 0;
-//    // Index pixel columns in character
-//    for (j=0; j<5; j++) {
-//        k = (i + col) * 5 + 128 * row + j;
-//        buffer[k] = character_data[index][j];
-//    }
-//}
+void invertLine(char buffer[], uint16_t line){
+    uint16_t i;
+    for(i = 128*line; i < 128*(line+1); i++){
+        buffer[i] ^= 0x7F;
+    }
+}
+
+void addUnderline(char buffer[], uint16_t line){
+    uint16_t i;
+    for(i = 128*line; i < 128*(line+1); i++){
+        buffer[i] |= 0x80;
+    }
+}
+
+void addRightArrow(char buffer[], uint8_t row, uint8_t col){
+    uint16_t pos = col + 128*row;
+    buffer[pos]   = 0xFE;
+    buffer[pos+1] = 0x7C;
+    buffer[pos+2] = 0x38;
+    buffer[pos+3] = 0x10;
+}

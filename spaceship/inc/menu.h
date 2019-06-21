@@ -21,10 +21,6 @@ int8_t nextScreen;
 03: Help
 */
 
-void invertLine(char buffer[], uint16_t line);
-void addUnderline(char buffer[], uint16_t line);
-void addRightArrow(char buffer[], uint8_t row, uint8_t col);
-
 //Different menu screens
 void screen_main(char buffer[]);
 void screen_help(char buffer[]);
