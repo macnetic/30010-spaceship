@@ -1,16 +1,20 @@
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <trig_lut.h>
-#include <figures.h>
-#include <ansi.h>
-#include <30010_io.h>
-
 #ifndef _SPACESHIP_H_
 #define _SPACESHIP_H_
 
+// Project imports
+#include <entity.h>
+#include <player.h>
+#include <enemy.h>
+#include <asteroid.h>
+//#include <figures.h>
+#include <ansi.h>
+//#include <30010_io.h>
+
 #define THRUST_STATE_ON  1
 #define THRUST_STATE_OFF 0
+
+#define GAME_WINDOW_HEIGHT 64
+#define GAME_WINDOW_WIDTH 250
 
 /** Maximum simultaneous game entities **/
 #define MAX_PLAYERS 1
@@ -20,29 +24,6 @@
 #define MAX_POWERUPS 10
 
 #define GRAVITY_CONST
-
-typedef struct Entity {
-    uint32_t x, y;
-    int32_t vx, vy;
-    uint32_t w, h;
-    bool isDeleted;
-} Entity;
-
-typedef struct Player {
-    Entity entity;
-    int32_t hitpoints;
-    uint32_t mass, ammunition, heading;
-} Player;
-
-typedef struct Enemy {
-    Entity entity;
-    int32_t mass, hitpoints;
-} Enemy;
-
-typedef struct Asteroid {
-    Entity entity;
-    int32_t mass;
-} Asteroid;
 
 typedef struct Projectile {
     Entity entity;
@@ -54,16 +35,8 @@ typedef struct Powerup {
     // what kind of powerup?
 } Powerup;
 
-void spawnPlayer(uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t mass, int32_t hitpoints, uint32_t ammunition, uint32_t heading);
-void spawnEnemy(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t mass, int32_t hitpoints);
 void spawnProjectile(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t damage);
-void spawnAsteroid(int32_t x, int32_t y, int32_t mass);
 
-void deleteEntity(Entity * ent);
-
-bool detectHit(Entity* ent1, Entity* ent2);
-
-void drawPlayer(Player* player);
 
 void initGame(void);
 void updateGame(void);

@@ -1,19 +1,18 @@
 #ifndef _TIMER2_H_
 #define _TIMER2_H_
+
 #include <stdint.h>
 #include <stdio.h>
 #include "30010_io.h"
 
 /** Symbolic constant definitions **/
-#define TIM2_PSC 15 // Prescale so 100 Hz reload value fits in 16 bits
-#define TIM2_RELOAD 39999 // Reload value for 100 Hz and prescale 15
+#define TIM2_PSC 18 // Prescale so 100 Hz reload value fits in 16 bits
+#define TIM2_RELOAD 65000 // Reload value for 100 Hz and prescale 15
 
-typedef struct {
+typedef struct Time{
     uint8_t m, s, hs;
     uint16_t h;
-} time;
-
-volatile time t = {0, 0, 0, 0};
+} Time;
 
 /** Timer2 configuration functions **/
 void setup_timer2(void);

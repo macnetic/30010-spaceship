@@ -7,7 +7,6 @@
 #include "charset.h"
 #include <wchar.h>
 #include <locale.h>
-//#include <spaceship.h>
 
 #define lowsmall 220
 #define highsmall 223
@@ -121,12 +120,12 @@ uint8_t rotateSpaceship(uint8_t x, uint8_t y, uint8_t heading){
             case 6: {x++; break;}
             case 7: {y--; x++; break;}
         }
+        return 0;
     }
     else return 0;
-
 }
 
-uint8_t thrust(){
+void thrust(){
 
 
 

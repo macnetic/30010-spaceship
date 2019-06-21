@@ -154,14 +154,14 @@ void window(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, char* title, uint8_t
     printf("%c", border[3]);
 
     // Top side
-    gotoxy(x1,y1+1);
+    gotoxy(x1+1,y1);
     for (uint8_t i=0; i < w-2; i++) printf("%c", border[5]);
 
     // Put title on top of top side
-    gotoxy(x1,y1+2);
+    gotoxy(x1+2,y1);
     printf("%c", border[6]);
     inverse(1);
-    printf("  %s  ", title);
+    printf("%s", title);
     inverse(0);
     printf("%c%c", border[7], border[5]);
 }
@@ -185,6 +185,15 @@ void read_chars(char out[], uint32_t n) {
         }
     }
     out[i] = '\0';
+}
+
+char getInput(void) {
+    char out = 0;
+
+    out = uart_get_char();
+    uart_clear();
+
+    return out;
 }
 
 

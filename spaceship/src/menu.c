@@ -55,6 +55,7 @@ void screen_help(char buffer[]){
     lcdWriteString("/3",    buffer,3,12);
     lcdWriteString("(n)ext",buffer,3,19);
 
+    lcd_push_buffer((uint8_t*) buffer); //Update display
     uint8_t helpPage = 1;
     uint8_t nPages = 3;
 
