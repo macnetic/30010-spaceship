@@ -26,6 +26,16 @@
 
 int main(void)
 {
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+
+    TIM_TimeBaseStructure.TIM_Prescaler;
+    TIM_TimeBaseStructure.TIM_Period;
+
+
+
+    initGame();
 
     uart_init(9600);
     //clrscr();
