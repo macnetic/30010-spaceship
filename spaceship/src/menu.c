@@ -67,21 +67,64 @@ void screen_main(char buffer[]){
         case '3':
             nextScreen = 3;
             break;
-//        default:
-            //currentScreen = 1;
     }
 }
 
 void screen_help(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
-    lcdWriteString("bla bla bla", buffer,0,0); //Help text
-
     lcdWriteString("(b)ack",buffer,3, 0);
-    lcdWriteString("1/X",   buffer,3,11);
+    lcdWriteString("/X",    buffer,3,12);
     lcdWriteString("(n)ext",buffer,3,19);
 
-    lcd_push_buffer(buffer); //Update display
+    uint8_t helpPage = 1;
+    uint8_t nPages = 3;
+
+    while(nextScreen == 3){
+        memset(buffer, 0x00, 512/4 * 3); //Clear first three lines
+        switch(helpPage){
+            case 1:
+                lcdWriteString("This is page 1", buffer,0,0);
+                lcdWriteString("1",buffer,3,11);
+                break;
+            case 2:
+                lcdWriteString("Next page is not page 3", buffer,0,0);
+                lcdWriteString("2",buffer,3,11);
+                break;
+            case 3:
+                lcdWriteString("I Lied!", buffer,0,0);
+                lcdWriteString("3",buffer,3,11);
+                break;
+        }
+        lcd_push_buffer(buffer); //Update display
+
+        read_chars(input,1);
+
+        switch(input[0]){
+            case 'b':
+                if(helpPage == 1){
+                    nextScreen = 0;
+                }else{
+                    helpPage--;
+                    if(helpPage == nPages-1){
+                        lcdWriteString("(n)ext",buffer,3,19);
+                    }
+                }
+                break;
+            case 'n':
+                if(helpPage < nPages){
+                    helpPage++;
+                    if(helpPage == nPages){
+                        lcdWriteString("(m)enu",buffer,3,19);
+                    }
+                }
+                break;
+            case 'm':
+                if(helpPage == nPages){
+                    nextScreen = 0;
+                }
+        }
+    }
 }
 
 void screen_stageSelect(char buffer[]){
