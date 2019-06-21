@@ -53,7 +53,7 @@ void screen_main(char buffer[]){
     lcdWriteString("(3) Help",          buffer,2,0);
     lcdWriteString("(4) Let's dance!",  buffer,3,0);
 
-    lcd_push_buffer((uint8_t*) buffer); //Update display
+    lcd_push_buffer((uint8_t*)buffer); //Update display
 
     read_chars(input,1); //Wait for input for next screen
 
@@ -96,7 +96,7 @@ void screen_help(char buffer[]){
                 lcdWriteString("3",buffer,3,11);
                 break;
         }
-        lcd_push_buffer(buffer); //Update display
+        lcd_push_buffer((uint8_t*)buffer); //Update display
 
         read_chars(input,1);
 
@@ -134,7 +134,7 @@ void screen_stageSelect(char buffer[]){
     lcdWriteString("Stage:",buffer,1,0);
     lcdWriteString("(b)ack",buffer,3,0);
 
-    lcd_push_buffer(buffer); //Update display
+    lcd_push_buffer((uint8_t*)buffer); //Update display
 
     uint8_t i, d, n;
     i = 0;
@@ -152,11 +152,11 @@ void screen_stageSelect(char buffer[]){
             //Write value to screen if input is correct
             lcdWriteString(input,buffer,1,7 + i++);
             n = 10 * n + d; //Since the loop runs a maximum of two times, the first value is multiplied by 10
-            lcd_push_buffer(buffer);
+            lcd_push_buffer((uint8_t*)buffer);
         }
         if(i >= 2){ //Only run this part if both numbers are entered
             lcdWriteString("Play this stage?  (y/n)",buffer,2,1);
-            lcd_push_buffer(buffer);
+            lcd_push_buffer((uint8_t*)buffer);
 
             int cont = 1; //Only exit loop when correct term is entered
             while(cont == 1){
