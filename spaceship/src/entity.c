@@ -21,10 +21,24 @@ void spawnEntity(Entity* ent, uint32_t x, uint32_t y, int32_t vx, int32_t vy, ui
     ent->isDeleted = false;
 }
 
+/*
+ * Function deleteEntity
+ * ---------------------
+ * Marks an Entity as deleted.
+ */
 void deleteEntity(Entity* ent) {
     ent->isDeleted = true;
 }
 
+/*
+ * Function detectHit
+ * ------------------
+ * Detects if two Entity instances are colliding, using simple rectangular hitboxes.
+ *
+ * ent_a, ent_b:   Entity instances being checked for collision
+ *
+ * returns: true if a collision is detected, false otherwise
+ */
 bool detectHit(Entity* ent_a, Entity * ent_b) {
     uint32_t dx, dy;
     bool x_overlap, y_overlap;
