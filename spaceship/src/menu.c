@@ -8,27 +8,27 @@
 #define ESC 0x1B
 
 //Screen navigation
-void navigator(char buffer[]){
-    if(nextScreen != currentScreen){
-        currentScreen = nextScreen;
-        switch(nextScreen){
-            case 0:
-                screen_main(buffer);
-                break;
-            case 1:
-                screen_help(buffer);
-                break;
-        }
-    }
-
-    read_chars(input,1); //Wait for input for next screen
-
-    if(input[0] == 'h'){
-        nextScreen = 1;
-    }else{
-        nextScreen = 0;
-    }
-}
+//void navigator(char buffer[]){
+//    if(nextScreen != currentScreen){
+//        currentScreen = nextScreen;
+//        switch(nextScreen){
+//            case 0:
+//                screen_main(buffer);
+//                break;
+//            case 1:
+//                screen_help(buffer);
+//                break;
+//        }
+//    }
+//
+//    read_chars(input,1); //Wait for input for next screen
+//
+//    if(input[0] == 'h'){
+//        nextScreen = 1;
+//    }else{
+//        nextScreen = 0;
+//    }
+//}
 
 void invertLine(char buffer[], uint16_t line){
     uint16_t i;
@@ -73,7 +73,7 @@ void screen_help(char buffer[]){
     lcdWriteString("1/X",   buffer,3,11);
     lcdWriteString("(n)ext",buffer,3,19);
 
-    lcd_push_buffer(buffer); //Update display
+    lcd_push_buffer((uint8_t*) buffer); //Update display
 }
 
 void screen_stageSelect(char buffer[]);

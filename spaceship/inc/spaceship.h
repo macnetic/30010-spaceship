@@ -7,11 +7,14 @@
 #include <enemy.h>
 #include <asteroid.h>
 //#include <figures.h>
-//#include <ansi.h>
+#include <ansi.h>
 //#include <30010_io.h>
 
 #define THRUST_STATE_ON  1
 #define THRUST_STATE_OFF 0
+
+#define GAME_WINDOW_HEIGHT 64
+#define GAME_WINDOW_WIDTH 250
 
 /** Maximum simultaneous game entities **/
 #define MAX_PLAYERS 1

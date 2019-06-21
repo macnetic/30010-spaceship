@@ -4,10 +4,12 @@
 // Project imports
 #include <entity.h>
 #include <figures.h>
+#include <30010_io.h>
+#include <ansi.h>
 
 // Player constants
-#define PLAYER_HITBOX_WIDTH 4
-#define PLAYER_HITBOX_HEIGHT 6
+#define PLAYER_HITBOX_WIDTH 6
+#define PLAYER_HITBOX_HEIGHT 4
 
 /*
  * typedef struct Player Player
@@ -29,6 +31,9 @@ typedef struct Player {
 
 void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t ammo, uint32_t heading, int32_t hp);
 
-void drawPlayer(Player* player);
+void controlPlayer(Player* player);
+
+void drawPlayerSprite(Player* player);
+void deletePlayerSprite(Player* player);
 
 #endif // _PLAYER_H_

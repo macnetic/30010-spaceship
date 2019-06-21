@@ -12,11 +12,11 @@
  */
 void spawnEntity(Entity* ent, uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t w, uint32_t h) {
     ent->x = x << FIX_14_SHIFT;
-    ent->y = x << FIX_14_SHIFT;
-    ent->vx = x << FIX_14_SHIFT;
-    ent->vy = x << FIX_14_SHIFT;
-    ent->w = x << FIX_14_SHIFT;
-    ent->h = x << FIX_14_SHIFT;
+    ent->y = y << FIX_14_SHIFT;
+    ent->vx = vx << FIX_14_SHIFT;
+    ent->vy = vx << FIX_14_SHIFT;
+    ent->w = w << FIX_14_SHIFT;
+    ent->h = h << FIX_14_SHIFT;
 
     ent->isDeleted = false;
 }
