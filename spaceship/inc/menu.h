@@ -12,14 +12,13 @@
 
 //Screen navigation
 char input[2];
-void navigator(char buffer[]);//TODO
+void navigator(char buffer[]);
 
-int8_t currentScreen;//TODO
-int8_t nextScreen;   //TODO
+int8_t nextScreen;
 /*
 00: Main menu
 02: Stage select
-03: Help (may change later)
+03: Help
 */
 
 void invertLine(char buffer[], uint16_t line);
@@ -28,7 +27,7 @@ void addRightArrow(char buffer[], uint8_t row, uint8_t col);
 
 //Different menu screens
 void screen_main(char buffer[]);
-void screen_help(char buffer[]);//TODO
-void screen_stageSelect(char buffer[]);//TODO
+void screen_help(char buffer[]);
+void screen_stageSelect(char buffer[]);
 
 #endif
