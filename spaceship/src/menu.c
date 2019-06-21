@@ -9,32 +9,16 @@
 
 //Screen navigation
 void navigator(char buffer[]){
-    if(nextScreen != currentScreen){
-        currentScreen = nextScreen;
-        switch(nextScreen){
-            case 0:
-                screen_main(buffer);
-                break;
-            case 2:
-                screen_stageSelect(buffer);
-                break;
-            case 3:
-                screen_help(buffer);
-                break;
-        }
-    }
-
-    read_chars(input,1); //Wait for input for next screen
-
-    switch(input[0]){
-        case '2':
-            nextScreen = 2;
+    switch(nextScreen){
+        case 0:
+            screen_main(buffer);
             break;
-        case '3':
-            nextScreen = 3;
+        case 2:
+            screen_stageSelect(buffer);
             break;
-        default:
-            nextScreen = 0;
+        case 3:
+            screen_help(buffer);
+            break;
     }
 }
 
@@ -70,6 +54,22 @@ void screen_main(char buffer[]){
     lcdWriteString("(4) Let's dance!",  buffer,3,0);
 
     lcd_push_buffer((uint8_t*) buffer); //Update display
+
+    read_chars(input,1); //Wait for input for next screen
+
+    switch(input[0]){
+        case '0':
+            nextScreen = 0;
+            break;
+        case '2':
+            nextScreen = 2;
+            break;
+        case '3':
+            nextScreen = 3;
+            break;
+//        default:
+            //currentScreen = 1;
+    }
 }
 
 void screen_help(char buffer[]){
@@ -100,7 +100,7 @@ void screen_stageSelect(char buffer[]){
         //TODO: Add black boxes
         read_chars(input,1);
         if(input[0] == 'b'){
-            //If player presses b, go back to main menu
+            //If player presses b, cancel out and go back to main menu
             nextScreen = 0;
             break;
         }
@@ -128,7 +128,6 @@ void screen_stageSelect(char buffer[]){
                         break;
                     case 'n':
                         //Reset screen
-                        currentScreen = 0;
                         cont = 0;
                         break;
                     case 'b':
@@ -140,15 +139,4 @@ void screen_stageSelect(char buffer[]){
             }
         }
     }
-/* Need testing before this is deleted
-    read_chars(input,1);
-    lcdWriteString(input,buffer,1,7);
-    lcd_push_buffer(buffer);
-    read_chars(input,1);
-    lcdWriteString(input,buffer,1,8);
-    lcd_push_buffer(buffer);
-
-    lcdWriteString("Play this stage?  (y/n)",buffer,2,1);
-
-    lcd_push_buffer(buffer);*/
 }
