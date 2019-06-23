@@ -22,6 +22,6 @@ typedef struct Enemy {
     int32_t hp;
 } Enemy;
 
-void spawnEnemy(Enemy* enemy, uint32_t x, uint32_t y, uint32_t mass, int32_t hp);
+void spawnEnemy(Enemy* enemy, uint32_t x, uint32_t y, uint32_t mass, int32_t hp, bool isDeleted);
 
 #endif // _ENEMY_H_

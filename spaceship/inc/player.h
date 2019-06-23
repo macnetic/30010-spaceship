@@ -34,11 +34,11 @@ typedef struct Player {
     int32_t hp;
 } Player;
 
-
-void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t ammo, uint32_t heading, int32_t hp);
+void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t ammo, uint32_t heading, int32_t hp, bool isDeleted);
 
 void controlPlayer(Player* player);
-void keepPlayerInBounds(Player* player, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);
+void thrustPlayer(Player* player);
+void keepPlayerInBounds(Player* player, int32_t x1, int32_t y1, int32_t x2, int32_t y2);
 
 void drawPlayerSprite(Player* player);
 void deletePlayerSprite(Player* player);

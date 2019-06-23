@@ -88,11 +88,7 @@ int main(void)
 
         if (t.hs >= 2) {
             updateGame();
-
             drawGame();
-
-            gotoxy(1, 1);
-//            printf("Frame dt: 0.%02d s", t.hs);
             t.hs = 0;
         }
     }

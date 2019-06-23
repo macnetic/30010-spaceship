@@ -35,9 +35,6 @@ typedef struct Powerup {
     // what kind of powerup?
 } Powerup;
 
-void spawnProjectile(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t damage);
-
-
 void initGame(void);
 void updateGame(void);
 void drawGame(void);

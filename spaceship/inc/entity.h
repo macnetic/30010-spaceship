@@ -26,12 +26,11 @@ typedef struct Entity {
     bool isDeleted;
 } Entity;
 
-void spawnEntity(Entity* ent, uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t width, uint32_t height);
-
+void spawnEntity(Entity* ent, uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t width, uint32_t height, bool isDeleted);
 void deleteEntity(Entity* ent);
-
 void updateEntity(Entity* ent);
 
 bool detectHit(Entity* ent_a, Entity* ent_b);
+uint8_t detectBoundaryBox(Entity* ent, int32_t x1, int32_t y1, int32_t x2, int32_t y2);
 
 #endif // _ENTITY_H_

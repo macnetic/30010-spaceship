@@ -3,7 +3,8 @@
 
 // Project imports
 #include <entity.h>
-
+#include <figures.h>
+#include <ansi.h>
 
 #define ASTEROID_HITBOX_WIDTH 8
 #define ASTEROID_HITBOX_HEIGHT 4
@@ -22,6 +23,9 @@
     int32_t mass;
 } Asteroid;
 
-void spawnAsteroid(Asteroid* asteroid, uint32_t x, uint32_t y, uint32_t mass);
+void spawnAsteroid(Asteroid* asteroid, uint32_t x, uint32_t y, uint32_t mass, bool isDeleted);
+
+void drawAsteroidSprite(Asteroid* asteroid);
+void deleteAsteroidSprite(Asteroid* asteroid);
 
 #endif // _ASTEROID_H_
