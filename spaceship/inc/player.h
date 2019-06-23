@@ -11,8 +11,8 @@
 #include <ansi.h>
 
 // Player constants
-#define PLAYER_HITBOX_WIDTH 6
-#define PLAYER_HITBOX_HEIGHT 4
+#define PLAYER_HITBOX_WIDTH 6 << FIX_14_SHIFT
+#define PLAYER_HITBOX_HEIGHT 4 << FIX_14_SHIFT
 #define PLAYER_VEL_SCALE 3
 #define PLAYER_MAX_X_VEL 2
 #define PLAYER_MAX_Y_VEL 1
@@ -32,6 +32,7 @@ typedef struct Player {
     Entity entity;
     uint32_t mass, ammo, heading;
     int32_t hp;
+    bool triggerPressed;
 } Player;
 
 void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t ammo, uint32_t heading, int32_t hp, bool isDeleted);

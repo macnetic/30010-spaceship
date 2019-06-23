@@ -100,6 +100,7 @@ void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t
     player->ammo = ammo;
     player->heading = heading;
     player->hp = hp;
+    player->triggerPressed = false;
 }
 
 /*
@@ -122,7 +123,8 @@ void controlPlayer(Player* player) {
         // Thrust forward
         thrustPlayer(player);
     } else if (input == ' ') {
-        // shoot projectile
+        // Set a flag to spawn a projectile shooting from this player
+        player->triggerPressed = true;
     }
 }
 
@@ -133,16 +135,16 @@ void controlPlayer(Player* player) {
  *
  * player:   pointer to player instance
  */
- void thrustPlayer(Player* player) {
-     switch (player->heading) {
-        case 0: player->entity.vy -= 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
-        case 1: player->entity.vx -= 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy -= 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
-        case 2: player->entity.vx -= 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
-        case 3: player->entity.vx -= 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy += 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
-        case 4: player->entity.vy += 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
-        case 5: player->entity.vx += 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy += 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
-        case 6: player->entity.vx += 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
-        case 7: player->entity.vx += 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy -= 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+void thrustPlayer(Player* player) {
+    switch (player->heading) {
+    case 0: player->entity.vy -= 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+    case 1: player->entity.vx -= 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy -= 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+    case 2: player->entity.vx -= 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+    case 3: player->entity.vx -= 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy += 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+    case 4: player->entity.vy += 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+    case 5: player->entity.vx += 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy += 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+    case 6: player->entity.vx += 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
+    case 7: player->entity.vx += 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); player->entity.vy -= 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE); break;
     }
 
     // Cap x velocity
@@ -160,7 +162,7 @@ void controlPlayer(Player* player) {
         else
             player->entity.vy = -PLAYER_MAX_Y_VEL << FIX_14_SHIFT;
     }
- }
+}
 
 /*
  * Function drawPlayerSprite
@@ -171,9 +173,7 @@ void controlPlayer(Player* player) {
  */
 void drawPlayerSprite(Player* player){
     fgcolor(2);
-
-    gotoxy(player->entity.x >> FIX_14_SHIFT, player->entity.y >> FIX_14_SHIFT);
-    printf(player_sprite[player->heading]);
+    drawSprite(&player->entity, player_sprite[player->heading]);
 }
 
 /*
@@ -184,10 +184,7 @@ void drawPlayerSprite(Player* player){
  * player:   pointer to the Player instance
  */
 void deletePlayerSprite(Player* player){
-    fgcolor(2);
-
-    gotoxy(player->entity.x >> FIX_14_SHIFT, player->entity.y >> FIX_14_SHIFT);
-    printf(player_delete_sprite[player->heading]);
+    drawSprite(&player->entity, player_delete_sprite[player->heading]);
 }
 
 /*

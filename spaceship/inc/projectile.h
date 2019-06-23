@@ -11,4 +11,7 @@ typedef struct Projectile {
 
 void spawnProjectile(Projectile* projectile, int32_t x, int32_t y, int32_t vx, int32_t vy, uint32_t mass, uint32_t damage);
 
+void drawProjectileSprite(Projectile* projectile);
+void deleteProjectileSprite(Projectile* projectile);
+
 #endif // _PROJECTILE_H_

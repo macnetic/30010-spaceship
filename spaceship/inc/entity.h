@@ -8,6 +8,7 @@
 
 // Project imports
 #include <trig_lut.h>
+#include <ansi.h>
 
 /*
  * typedef struct Entity Entity
@@ -32,5 +33,7 @@ void updateEntity(Entity* ent);
 
 bool detectHit(Entity* ent_a, Entity* ent_b);
 uint8_t detectBoundaryBox(Entity* ent, int32_t x1, int32_t y1, int32_t x2, int32_t y2);
+
+void drawSprite(Entity* ent, const char sprite[]);
 
 #endif // _ENTITY_H_

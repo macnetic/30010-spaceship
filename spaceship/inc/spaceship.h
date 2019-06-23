@@ -6,6 +6,7 @@
 #include <player.h>
 #include <enemy.h>
 #include <asteroid.h>
+#include <projectile.h>
 //#include <figures.h>
 #include <ansi.h>
 //#include <30010_io.h>
@@ -14,21 +15,16 @@
 #define THRUST_STATE_OFF 0
 
 #define GAME_WINDOW_HEIGHT 64
-#define GAME_WINDOW_WIDTH 250
+#define GAME_WINDOW_WIDTH 200
 
 /** Maximum simultaneous game entities **/
 #define MAX_PLAYERS 1
-#define MAX_ASTEROIDS 10
-#define MAX_ENEMIES 10
-#define MAX_PROJECTILES 100
-#define MAX_POWERUPS 10
+#define MAX_ASTEROIDS 5
+#define MAX_ENEMIES 5
+#define MAX_PROJECTILES 20
+#define MAX_POWERUPS 5
 
 #define GRAVITY_CONST
-
-typedef struct Projectile {
-    Entity entity;
-    int32_t damage;
-} Projectile;
 
 typedef struct Powerup {
     Entity entity;

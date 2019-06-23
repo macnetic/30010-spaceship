@@ -7,51 +7,6 @@ static Asteroid asteroids[MAX_ASTEROIDS];
 static Projectile projectiles[MAX_PROJECTILES];
 static Powerup powerups[MAX_POWERUPS];
 
-///** Entity spawn functions **/
-//void spawnPlayer(uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t mass, int32_t hitpoints, uint32_t ammunition, uint32_t heading) {
-//    for (uint16_t i = 0; i < MAX_PLAYERS; i++) {
-//        // Check if we can put the new projectile here
-//        if (~players[i].entity.isDeleted) {
-//            Player p = {
-//                {
-//                    x  << FIX_14_SHIFT,
-//                    y  << FIX_14_SHIFT,
-//                    vx << FIX_14_SHIFT,
-//                    vy << FIX_14_SHIFT,
-//                    6  << FIX_14_SHIFT,  // Makeshift value
-//                    6  << FIX_14_SHIFT,  // Makeshift value
-//                    false},
-//                mass << FIX_14_SHIFT,
-//                hitpoints << FIX_14_SHIFT,
-//                ammunition << FIX_14_SHIFT,
-//                heading};
-//
-//            players[i] = p;
-//            break;
-//        }
-//    }
-//}
-
-//void spawnProjectile(int32_t x, int32_t y, int32_t vx, int32_t vy, int32_t damage) {
-//    for (uint16_t i = 0; i < MAX_PROJECTILES; i++) {
-//        // Check if we can put the new projectile here
-//        if (~projectiles[i].entity.isDeleted) {
-//            Projectile p = {
-//                {
-//                    x  << FIX_14_SHIFT,
-//                    y  << FIX_14_SHIFT,
-//                    vx << FIX_14_SHIFT,
-//                    vy << FIX_14_SHIFT,
-//                    1  << FIX_14_SHIFT,
-//                    1  << FIX_14_SHIFT,
-//                    false},
-//                damage << FIX_14_SHIFT};
-//
-//            projectiles[i] = p;
-//            break;
-//        }
-//    }
-//}
 
 /*
  * Function clearEntities
@@ -85,22 +40,17 @@ void initGame(void) {
     fgcolor(15);
     window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
 
-    spawnPlayer(&players[0], 200, 40, 0, 0, 0, 0, false);
+    spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 0, 0, 0, false);
 
-    spawnAsteroid(&asteroids[0], 50, 25, 100, false);
-    spawnAsteroid(&asteroids[1], 100, 40, 100, false);
+    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 100 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 100 << FIX_14_SHIFT, false);
 }
 
-/**
-    Kør fysik
-    Projectile and asteroid hit detection
-    Deal damage
-    Delete dead entities
-    Power-up hit detection
-    Activate power-ups
-    etc.
-
-**/
+/*
+ * Function updateGame
+ * -------------------
+ * Update the game state.
+ */
 void updateGame(void) {
     for (uint16_t i = 0; i < MAX_ASTEROIDS; i++) {
             if (asteroids[i].entity.isDeleted == false) {
@@ -114,8 +64,105 @@ void updateGame(void) {
 
             controlPlayer(&players[i]);
 
+            if (players[i].triggerPressed == true) {
+                // Check if we can spawn a bullet, or if the game limit has been reached
+                // TODO: Take all this code and put it into a function
+                for (int16_t j = 0; j < MAX_PROJECTILES; j++){
+                    if (projectiles[j].entity.isDeleted == true) {
+                        int32_t x, y, vx, vy;
+
+                        switch (players[i].heading) {
+                            case 0: {
+                                x  = 0;
+                                y  = -(players[i].entity.h / 2);
+                                vx = 0;
+                                vy = -(1 << (FIX_14_SHIFT - 1));
+                                break;
+                            }
+                            case 1: {
+                                x  = -(players[i].entity.w / 2);
+                                y  = -(players[i].entity.h / 2);
+                                vx = -(1 << FIX_14_SHIFT);
+                                vy = -(1 << (FIX_14_SHIFT - 1));
+                                break;
+                            }
+                            case 2: {
+                                x  = -(players[i].entity.w / 2);
+                                y  = 0;
+                                vx = -(1 << FIX_14_SHIFT);
+                                vy = 0;
+                                break;
+                            }
+                            case 3: {
+                                x  = -(players[i].entity.w / 2);
+                                y  = (players[i].entity.h / 2);
+                                vx = -(1 << FIX_14_SHIFT);
+                                vy = (1 << (FIX_14_SHIFT - 1));
+                                break;
+                            }
+                            case 4: {
+                                x  = 0;
+                                y  = (players[i].entity.h / 2);
+                                vx = 0;
+                                vy = (1 << (FIX_14_SHIFT - 1));
+                                break;
+                            }
+                            case 5: {
+                                x  = (players[i].entity.w / 2);
+                                y  = (players[i].entity.h / 2);
+                                vx = (1 << FIX_14_SHIFT);
+                                vy = (1 << (FIX_14_SHIFT - 1));
+                                break;
+                            }
+                            case 6: {
+                                x  = (players[i].entity.w / 2);
+                                y  = 0;
+                                vx = (1 << FIX_14_SHIFT);
+                                vy = 0;
+                                break;
+                            }
+                            case 7: {
+                                x  = (players[i].entity.w / 2);
+                                y  = -(players[i].entity.h / 2);
+                                vx = (1 << FIX_14_SHIFT);
+                                vy = -(1 << (FIX_14_SHIFT - 1));
+                                break;
+                            }
+                        }
+
+                        spawnProjectile(&projectiles[j],
+                                        players[i].entity.x + x, players[i].entity.y + y,
+                                        players[i].entity.vx + vx, players[i].entity.vy + vy,
+                                        1 << FIX_14_SHIFT, 1 << FIX_14_SHIFT);
+
+                        break;
+                    }
+
+                }
+                players[i].triggerPressed = false;
+            }
+
             updateEntity(&players[i].entity);
             keepPlayerInBounds(&players[i], 3, 2, GAME_WINDOW_WIDTH - 3, GAME_WINDOW_HEIGHT - 1);
+        }
+    }
+
+    for (uint16_t i = 0; i < MAX_PROJECTILES; i++) {
+        if (projectiles[i].entity.isDeleted == false) {
+            deleteProjectileSprite(&projectiles[i]);
+
+            for (uint16_t j = 0; j < MAX_ASTEROIDS; j++) {
+                uint32_t dx, dy, d;
+
+                dx = abs(asteroids[j].entity.x - projectiles[i].entity.x);
+                dy = abs(asteroids[j].entity.y - projectiles[i].entity.y);
+                d = 1/()
+            }
+
+            updateEntity(&projectiles[i].entity);
+            if (detectBoundaryBox(&projectiles[i].entity, 2, 2, GAME_WINDOW_WIDTH - 2, GAME_WINDOW_HEIGHT - 1) != 0) {
+                projectiles[i].entity.isDeleted = true;
+            }
         }
     }
 }
@@ -135,7 +182,7 @@ void drawGame(void) {
 
     for (uint16_t i = 0; i < MAX_PROJECTILES; i++) {
             if (projectiles[i].entity.isDeleted == false) {
-//                drawProjectile();
+                drawProjectileSprite(&projectiles[i]);
             }
     }
 

@@ -11,12 +11,12 @@
  * isDeleted:   flag to keep track of whether a game entity is currently active in the game
  */
 void spawnEntity(Entity* ent, uint32_t x, uint32_t y, int32_t vx, int32_t vy, uint32_t w, uint32_t h, bool isDeleted) {
-    ent->x = x << FIX_14_SHIFT;
-    ent->y = y << FIX_14_SHIFT;
-    ent->vx = vx << FIX_14_SHIFT;
-    ent->vy = vx << FIX_14_SHIFT;
-    ent->w = w << FIX_14_SHIFT;
-    ent->h = h << FIX_14_SHIFT;
+    ent->x = x;
+    ent->y = y;
+    ent->vx = vx;
+    ent->vy = vy;
+    ent->w = w;
+    ent->h = h;
 
     ent->isDeleted = isDeleted;
 }
@@ -96,4 +96,9 @@ uint8_t detectBoundaryBox(Entity* ent, int32_t x1, int32_t y1, int32_t x2, int32
     }
 
     return boundaryState;
+}
+
+void drawSprite(Entity* ent, const char sprite[]) {
+    gotoxy(ent->x >> FIX_14_SHIFT, ent->y >> FIX_14_SHIFT);
+    printf(sprite);
 }
