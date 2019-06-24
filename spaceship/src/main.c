@@ -26,15 +26,6 @@
 
 #define BAUD_RATE 921600
 
-volatile uint8_t frame_trigger;
-
-void TIM3_IRQHandler(void) {
-    frame_trigger = 1;
-
-    TIM3->SR &=~0x0001; // Clear interrupt bit
-}
-
-
 int main(void)
 {
     extern Time t;
@@ -84,7 +75,9 @@ int main(void)
 
 
     while(1){
-//        navigator(&buffer);
+        while(nextScreen != 1){
+            navigator(&buffer);
+        }
 
         if (t.hs >= 2) {
             updateGame();
