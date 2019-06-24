@@ -36,8 +36,8 @@ void screen_main(char buffer[]){
     read_chars(input,1); //Wait for input for next screen
 
     switch(input[0]){
-        case '0':
-            nextScreen = 0;
+        case '1':
+            nextScreen = 1;
             break;
         case '2':
             nextScreen = 2;

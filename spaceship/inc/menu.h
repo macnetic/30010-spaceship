@@ -17,6 +17,7 @@ void navigator(char buffer[]);
 int8_t nextScreen;
 /*
 00: Main menu
+01: HUD (Exit menu and play game)
 02: Stage select
 03: Help
 */
