@@ -42,8 +42,8 @@ void initGame(void) {
 
     spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 0, 0, 0, false);
 
-    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 100 << FIX_14_SHIFT, false);
-    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 100 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 10 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 10 << FIX_14_SHIFT, false);
 }
 
 /*
@@ -133,7 +133,7 @@ void updateGame(void) {
                         spawnProjectile(&projectiles[j],
                                         players[i].entity.x + x, players[i].entity.y + y,
                                         players[i].entity.vx + vx, players[i].entity.vy + vy,
-                                        1 << FIX_14_SHIFT, 1 << FIX_14_SHIFT);
+                                        10 << FIX_14_SHIFT, 1 << FIX_14_SHIFT);
 
                         break;
                     }
@@ -152,22 +152,28 @@ void updateGame(void) {
             deleteProjectileSprite(&projectiles[i]);
 
             for (uint16_t j = 0; j < MAX_ASTEROIDS; j++) {
-//                int32_t d, dx, dy, gravity;
-//
-//                // Compute distance
-//                dx = asteroids[j].entity.x - projectiles[i].entity.x;
-//                dy = asteroids[j].entity.y - projectiles[i].entity.y;
-//                d = FIX_14_MULT(dx, dx);
-////                + FIX_14_MULT(dy, dy);
-//
-//                // Find normalized vector between bodies
-//                dx = FIX_14_DIV(dx, d);
-//                dy = FIX_14_DIV(dy, d);
-//
-//                gravity = FIX_14_DIV(FIX_14_MULT(1, asteroids[i].mass), FIX_14_MULT(FIX_14_MULT(d,d),d));
-//
-//                projectiles[i].entity.vx += FIX_14_DIV(FIX_14_MULT(dx, gravity), projectiles[i].mass);
-//                projectiles[i].entity.vy += FIX_14_DIV(FIX_14_MULT(dy, gravity), projectiles[i].mass);
+                if (asteroids[j].entity.isDeleted == false) {
+                    uint32_t d;
+                    int32_t dx, dy, gravity;
+
+                    // Compute distance, using integer precision, otherwise we run out of space fast
+                    dx = asteroids[j].entity.x - projectiles[i].entity.x;
+                    dy = asteroids[j].entity.y - projectiles[i].entity.y;
+                    d = abs(dx) + abs(dy);
+
+                    gravity = FIX_14_DIV(FIX_14_MULT(GRAVITY_CONST, asteroids[i].mass), d);
+
+
+                    if (dx < 0)
+                        projectiles[i].entity.vx -= FIX_14_DIV(FIX_14_MULT(GRAVITY_CONST, abs(dx)), d);
+                    else
+                        projectiles[i].entity.vx += FIX_14_DIV(FIX_14_MULT(GRAVITY_CONST, abs(dx)), d);
+
+                    if (dy < 0)
+                        projectiles[i].entity.vy -= FIX_14_DIV(FIX_14_MULT(GRAVITY_CONST, abs(dy)), d);
+                    else
+                        projectiles[i].entity.vy += FIX_14_DIV(FIX_14_MULT(GRAVITY_CONST, abs(dy)), d);
+                }
             }
 
             updateEntity(&projectiles[i].entity);

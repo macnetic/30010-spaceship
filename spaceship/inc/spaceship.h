@@ -27,7 +27,7 @@
 #define MAX_PROJECTILES 20
 #define MAX_POWERUPS 5
 
-#define GRAVITY_CONST
+#define GRAVITY_CONST 667
 
 typedef struct Powerup {
     Entity entity;
@@ -38,6 +38,6 @@ void initGame(void);
 void updateGame(void);
 void drawGame(void);
 
-void gravity(void); // TODO
+//void gravity(void); // TODO
 
 #endif // _SPACESHIP_H_
