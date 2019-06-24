@@ -1,6 +1,9 @@
 #ifndef _SPACESHIP_H_
 #define _SPACESHIP_H_
 
+// Standard library imports
+#include <stdlib.h>
+
 // Project imports
 #include <entity.h>
 #include <player.h>

@@ -152,11 +152,22 @@ void updateGame(void) {
             deleteProjectileSprite(&projectiles[i]);
 
             for (uint16_t j = 0; j < MAX_ASTEROIDS; j++) {
-                uint32_t dx, dy, d;
-
-                dx = abs(asteroids[j].entity.x - projectiles[i].entity.x);
-                dy = abs(asteroids[j].entity.y - projectiles[i].entity.y);
-                d = 1/()
+//                int32_t d, dx, dy, gravity;
+//
+//                // Compute distance
+//                dx = asteroids[j].entity.x - projectiles[i].entity.x;
+//                dy = asteroids[j].entity.y - projectiles[i].entity.y;
+//                d = FIX_14_MULT(dx, dx);
+////                + FIX_14_MULT(dy, dy);
+//
+//                // Find normalized vector between bodies
+//                dx = FIX_14_DIV(dx, d);
+//                dy = FIX_14_DIV(dy, d);
+//
+//                gravity = FIX_14_DIV(FIX_14_MULT(1, asteroids[i].mass), FIX_14_MULT(FIX_14_MULT(d,d),d));
+//
+//                projectiles[i].entity.vx += FIX_14_DIV(FIX_14_MULT(dx, gravity), projectiles[i].mass);
+//                projectiles[i].entity.vy += FIX_14_DIV(FIX_14_MULT(dy, gravity), projectiles[i].mass);
             }
 
             updateEntity(&projectiles[i].entity);

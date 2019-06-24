@@ -16,6 +16,5 @@ void drawProjectileSprite(Projectile* projectile) {
 }
 
 void deleteProjectileSprite(Projectile* projectile) {
-    fgcolor(10);
     drawSprite(&projectile->entity, projectile_delete_sprite);
 }
