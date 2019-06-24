@@ -209,6 +209,8 @@ void drawGame(void) {
                 }
         }
 
+    updateHUD(&players[0]);
+
     // Hide cursor away
     gotoxy(0,0);
 }

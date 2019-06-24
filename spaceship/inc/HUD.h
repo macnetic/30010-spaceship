@@ -4,10 +4,11 @@
 #include "trig_lut.h"
 #include "30010_io.h"
 #include "charset.h"
+#include "player.h"
 
 #ifndef _HUD_H_
 #define _HUD_H_
 
-//Nu skal vi bare skrive nogle funktioner!
+void updateHUD(Player * player);
 
 #endif
