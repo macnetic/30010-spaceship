@@ -10,6 +10,7 @@
 #include <enemy.h>
 #include <asteroid.h>
 #include <projectile.h>
+#include <powerup.h>
 #include <ansi.h>
 
 #define THRUST_STATE_ON  1
@@ -27,14 +28,10 @@
 
 #define GRAVITY_CONST 67
 
-typedef struct Powerup {
-    Entity entity;
-    // what kind of powerup?
-} Powerup;
-
 void initGame(void);
 void updateGame(void);
 void drawGame(void);
+void clearAllSprites(void);
 
 //void gravity(void); // TODO
 

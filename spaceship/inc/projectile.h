@@ -5,6 +5,9 @@
 #include <entity.h>
 #include <asteroid.h>
 
+#define PROJECTILE_HITBOX_WIDTH 1 << FIX_14_SHIFT
+#define PROJECTILE_HITBOX_HEIGHT 1 << FIX_14_SHIFT
+
 typedef struct Projectile {
     Entity entity;
     uint32_t mass, damage;

@@ -4,7 +4,7 @@ const char projectile_sprite[] = "*";
 const char projectile_delete_sprite[] = " ";
 
 void spawnProjectile(Projectile* projectile, int32_t x, int32_t y, int32_t vx, int32_t vy, uint32_t mass, uint32_t damage) {
-    spawnEntity(&projectile->entity, x, y, vx, vy, 1, 1, false);
+    spawnEntity(&projectile->entity, x, y, vx, vy, PROJECTILE_HITBOX_WIDTH, PROJECTILE_HITBOX_HEIGHT, false);
 
     projectile->mass = mass;
     projectile->damage = damage;

@@ -56,8 +56,8 @@ bool detectHit(Entity* ent_a, Entity * ent_b) {
     dx = abs(ent_a->x - ent_b->x);
     dy = abs(ent_a->y - ent_b->y);
 
-    x_overlap = ((ent_a->w + ent_b->w) >> 1) < dx;
-    y_overlap = ((ent_a->h + ent_b->h) >> 1) < dy;
+    x_overlap = dx < ((ent_a->w + ent_b->w) >> 1);
+    y_overlap = dy < ((ent_a->h + ent_b->h) >> 1);
 
     if (x_overlap && y_overlap)
         return true;

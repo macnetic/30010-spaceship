@@ -85,6 +85,7 @@ int main(void)
 //        }
 
         if (t.hs >= 2) {
+            clearAllSprites();
             updateGame();
             drawGame();
             t.hs = 0;
