@@ -104,6 +104,8 @@ void updateGame(void) {
             // Deal damage to the player and delete the projectile if hit
             if (detectHit(&projectiles[i].entity, &players[j].entity) == true) {
                 players[j].hp -= projectiles[i].damage;
+
+                deleteProjectileSprite(&projectiles[i]);
                 deleteEntity(&projectiles[i].entity);
             }
         }
@@ -116,6 +118,8 @@ void updateGame(void) {
             // Deal damage to the enemy and delete the projectile if hit
             if (detectHit(&projectiles[i].entity, &enemies[j].entity) == true) {
                 enemies[j].hp -= projectiles[i].damage;
+
+                deleteProjectileSprite(&projectiles[i]);
                 deleteEntity(&projectiles[i].entity);
             }
         }
@@ -128,6 +132,7 @@ void updateGame(void) {
 
             // Delete the projectile if hit
             if (detectHit(&projectiles[i].entity, &asteroids[j].entity) == true) {
+                deleteProjectileSprite(&projectiles[i]);
                 deleteEntity(&projectiles[i].entity);
             }
 
