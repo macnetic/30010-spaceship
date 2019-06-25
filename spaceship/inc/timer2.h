@@ -6,8 +6,8 @@
 #include "30010_io.h"
 
 /** Symbolic constant definitions **/
-#define TIM2_PSC 28 // Prescale so 100 Hz reload value fits in 16 bits
-#define TIM2_RELOAD 64000 // Reload value for 100 Hz and prescale 15
+#define TIM2_PSC 9// Prescale so 100 Hz reload value fits in 16 bits
+#define TIM2_RELOAD 63999 // Reload value for 100 Hz and prescale 40
 
 typedef struct Time{
     uint8_t m, s, hs;

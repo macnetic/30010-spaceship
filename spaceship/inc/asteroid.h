@@ -6,8 +6,8 @@
 #include <figures.h>
 #include <ansi.h>
 
-#define ASTEROID_HITBOX_WIDTH 8
-#define ASTEROID_HITBOX_HEIGHT 4
+#define ASTEROID_HITBOX_WIDTH 8 << FIX_14_SHIFT
+#define ASTEROID_HITBOX_HEIGHT 4 << FIX_14_SHIFT
 
 
 /*

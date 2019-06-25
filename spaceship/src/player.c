@@ -140,8 +140,9 @@ void controlPlayer(Player* player) {
         player->triggerPressed = true;
 
     } else if(input == 0x1B){ // minimize window
-        printf("%c[9;0t",ESC);
 
+        printf("%c[9;0t",ESC);
+        clrscr();
     } else if (input == 0x0D){ // Maximize window and redraw window to continue playing
         printf("%c[9;1t",ESC);
         clrscr();

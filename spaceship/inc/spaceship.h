@@ -23,16 +23,10 @@
 #define MAX_PLAYERS 1
 #define MAX_ASTEROIDS 5
 #define MAX_ENEMIES 5
-#define MAX_PROJECTILES 2
+#define MAX_PROJECTILES 20
 #define MAX_POWERUPS 5
 
 #define GRAVITY_CONST 90
-
-typedef struct Powerup {
-    Entity entity;
-    // what kind of powerup?
-} Powerup;
->>>>>>> Stashed changes
 
 void initGame(void);
 void updateGame(void);

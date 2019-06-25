@@ -50,19 +50,9 @@ int main(void)
 
     init_led();
     set_led(0x00);
-    //clrscr();
-    //gotoxy(1,1);
+
     char buffer [512];
-//
-//    char out[2];
-//    //gotoxy(1,1);
-//
-//    lcd_init();
-//
-//    //screen_main(&buffer);
-////    nextScreen = 0;
-//
-////    char buffer[512];
+
     lcd_init();
     memset(buffer, 0x00, 512);
     lcd_push_buffer((uint8_t*) buffer);
@@ -84,7 +74,7 @@ int main(void)
     printf("%c[49C",ESC);
     printf("Your objective is to fly around and shoot down as many intruders as possible to help save us all.\n");
     printf("%c[49C",ESC);
-    printf("For further information glare upon the glorious lcd screen, controlled by the keyboard \n");
+    printf("For further information glare upon the glorious LCD screen, controlled by the keyboard \n");
     printf("%c[49C",ESC);
     printf("Good luck.");
 
@@ -97,7 +87,7 @@ int main(void)
             navigator(&buffer);
                     }
 
-        if (t.hs >= 1) {
+        if (t.hs >= 5) {
             updateGame();
             drawGame();
             t.hs = 0;

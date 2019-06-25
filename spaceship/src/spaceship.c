@@ -52,7 +52,7 @@ void clearAllSprites(void) {
 
     for (uint16_t i = 0; i < MAX_POWERUPS; i++) {
         if (powerups[i].entity.isDeleted == false) {
-//                drawPowerup();
+            deletePowerupSprite(&powerups[i]);
         }
     }
 
@@ -104,7 +104,9 @@ void updateGame(void) {
             // Deal damage to the player and delete the projectile if hit
             if (detectHit(&projectiles[i].entity, &players[j].entity) == true) {
                 players[j].hp -= projectiles[i].damage;
-//                deleteEntity(&projectiles[i].entity);
+
+                deleteProjectileSprite(&projectiles[i]);
+                deleteEntity(&projectiles[i].entity);
             }
         }
 
@@ -116,6 +118,8 @@ void updateGame(void) {
             // Deal damage to the enemy and delete the projectile if hit
             if (detectHit(&projectiles[i].entity, &enemies[j].entity) == true) {
                 enemies[j].hp -= projectiles[i].damage;
+
+                deleteProjectileSprite(&projectiles[i]);
                 deleteEntity(&projectiles[i].entity);
             }
         }
@@ -128,19 +132,12 @@ void updateGame(void) {
 
             // Delete the projectile if hit
             if (detectHit(&projectiles[i].entity, &asteroids[j].entity) == true) {
+                deleteProjectileSprite(&projectiles[i]);
                 deleteEntity(&projectiles[i].entity);
             }
 
             // Compute gravity
             computeGravity(&projectiles[i],&asteroids[j], GRAVITY_CONST);
-
-            // Move projectile
-            updateEntity(&projectiles[i].entity);
-
-            // Delete projectile if out of bounds
-            if (detectBoundaryBox(&projectiles[i].entity, 2, 2, GAME_WINDOW_WIDTH - 2, GAME_WINDOW_HEIGHT - 1) != 0) {
-                        projectiles[i].entity.isDeleted = true;
-                    }
         }
     }
 
@@ -157,13 +154,17 @@ void updateGame(void) {
             // Deal damage to the player and delete the projectile if hit
             if (detectHit(&powerups[i].entity, &players[j].entity) == true) {
                 // TODO Player picks up powerup
+                deletePowerupSprite(&powerups[i]);
                 deleteEntity(&powerups[i].entity);
             }
         }
     }
 
+    // Players
     for (uint16_t i = 0; i < MAX_PLAYERS; i++) {
         if (players[i].entity.isDeleted == false) {
+            // Because the heading affects the sprite being drawn, and we update that here, we need to remove the player sprite here
+            deletePlayerSprite(&players[i]);
 
             controlPlayer(&players[i]);
 
@@ -250,14 +251,35 @@ void updateGame(void) {
                 }
                 players[i].triggerPressed = false;
             }
-
-            updateEntity(&players[i].entity);
-            keepPlayerInBounds(&players[i], 3, 2, GAME_WINDOW_WIDTH - 3, GAME_WINDOW_HEIGHT - 1);
         }
     }
 
+    // Clear all sprites after all the hard calculations are done
+    clearAllSprites();
+
     for (uint16_t i = 0; i < MAX_ENEMIES; i++) {
-        updateEntity(&enemies[i].entity);
+        if (enemies[i].entity.isDeleted == false) {
+            updateEntity(&enemies[i].entity);
+        }
+    }
+
+    for (uint16_t i = 0; i < MAX_PROJECTILES; i++) {
+        if (projectiles[i].entity.isDeleted == false) {
+            // Move projectile
+            updateEntity(&projectiles[i].entity);
+
+            // Delete projectile if out of bounds
+            if (detectBoundaryBox(&projectiles[i].entity, 2, 2, GAME_WINDOW_WIDTH - 2, GAME_WINDOW_HEIGHT - 1) != 0) {
+                projectiles[i].entity.isDeleted = true;
+            }
+        }
+    }
+
+    for (uint16_t i = 0; i < MAX_PLAYERS; i++) {
+        if (players[i].entity.isDeleted == false) {
+            updateEntity(&players[i].entity);
+            keepPlayerInBounds(&players[i], 3, 2, GAME_WINDOW_WIDTH - 3, GAME_WINDOW_HEIGHT - 1);
+        }
     }
 }
 
