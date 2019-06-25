@@ -85,7 +85,7 @@ int main(void)
 
        while(nextScreen != 1){
             navigator(&buffer);
-                    }
+        }
 
         if (t.hs >= 5) {
             updateGame();
