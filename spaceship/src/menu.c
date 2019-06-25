@@ -52,27 +52,38 @@ void screen_help(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
     lcdWriteString("(b)ack",buffer,3, 0);
-    lcdWriteString("/3",    buffer,3,12);
+    lcdWriteString("/4",    buffer,3,12);
     lcdWriteString("(n)ext",buffer,3,19);
 
     lcd_push_buffer((uint8_t*) buffer); //Update display
     uint8_t helpPage = 1;
-    uint8_t nPages = 3;
+    uint8_t nPages = 4;
 
     while(nextScreen == 3){
         memset(buffer, 0x00, 512/4 * 3); //Clear first three lines
         switch(helpPage){
             case 1:
-                lcdWriteString("This is page 1", buffer,0,0);
+                lcdWriteString("Use A and D to steer", buffer,0,0);
+                lcdWriteString("W propels the spaceship", buffer,1,0);
                 lcdWriteString("1",buffer,3,11);
                 break;
             case 2:
-                lcdWriteString("Next page is not page 3", buffer,0,0);
+                lcdWriteString("Press S to use the", buffer,0,0);
+                lcdWriteString("spacebrake, slowing down", buffer,1,0);
+                lcdWriteString("the ship", buffer,2,0);
                 lcdWriteString("2",buffer,3,11);
                 break;
             case 3:
-                lcdWriteString("I Lied!", buffer,0,0);
+                lcdWriteString("Space shoots bullets", buffer,0,0);
+                lcdWriteString("Hit red enemies with", buffer,1,0);
+                lcdWriteString("bullets to kill them", buffer,2,0);
                 lcdWriteString("3",buffer,3,11);
+                break;
+            case 4:
+                lcdWriteString("Astroids have gravity", buffer,0,0);
+                lcdWriteString("Gravity causes your", buffer,1,0);
+                lcdWriteString("bullets to bend", buffer,2,0);
+                lcdWriteString("4",buffer,3,11);
                 break;
         }
         lcd_push_buffer((uint8_t*)buffer); //Update display

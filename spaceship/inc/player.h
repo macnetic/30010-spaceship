@@ -39,6 +39,7 @@ void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t
 
 void controlPlayer(Player* player);
 void thrustPlayer(Player* player);
+void brakePlayer(Player* player);
 void keepPlayerInBounds(Player* player, int32_t x1, int32_t y1, int32_t x2, int32_t y2);
 
 void drawPlayerSprite(Player* player);
