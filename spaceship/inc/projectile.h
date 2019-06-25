@@ -3,6 +3,7 @@
 
 // Project imports
 #include <entity.h>
+#include <asteroid.h>
 
 typedef struct Projectile {
     Entity entity;
@@ -10,6 +11,8 @@ typedef struct Projectile {
 } Projectile;
 
 void spawnProjectile(Projectile* projectile, int32_t x, int32_t y, int32_t vx, int32_t vy, uint32_t mass, uint32_t damage);
+
+void computeGravity(Projectile* projectile, Asteroid* Asteroid, uint32_t g_const);
 
 void drawProjectileSprite(Projectile* projectile);
 void deleteProjectileSprite(Projectile* projectile);

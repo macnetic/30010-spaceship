@@ -10,6 +10,37 @@ void spawnProjectile(Projectile* projectile, int32_t x, int32_t y, int32_t vx, i
     projectile->damage = damage;
 }
 
+/*
+ * Function computeGravity
+ * -----------------------
+ * Applies gravity to projectiles from asteroids.
+ *
+ * projectile:   pointer to Projectile
+ * asteroid:     pointer to Asteroid
+ */
+void computeGravity(Projectile* projectile, Asteroid* asteroid, uint32_t g_const) {
+    static uint32_t d, gravity;
+    static int32_t dx, dy;
+
+    // Compute distance, using integer precision, otherwise we run out of space fast
+    dx = asteroid->entity.x - projectile->entity.x;
+    dy = asteroid->entity.y - projectile->entity.y;
+    d = abs(dx) + abs(dy);
+
+    gravity = FIX_14_DIV(FIX_14_MULT(g_const, asteroid->mass), FIX_14_MULT(FIX_14_MULT(d,d),d));
+
+
+    if (dx < 0)
+        projectile->entity.vx -= FIX_14_DIV(FIX_14_MULT(gravity, abs(dx)), d);
+    else
+        projectile->entity.vx += FIX_14_DIV(FIX_14_MULT(gravity, abs(dx)), d);
+
+    if (dy < 0)
+        projectile->entity.vy -= FIX_14_DIV(FIX_14_MULT(gravity, abs(dy)), d);
+    else
+        projectile->entity.vy += FIX_14_DIV(FIX_14_MULT(gravity, abs(dy)), d);
+}
+
 void drawProjectileSprite(Projectile* projectile) {
     fgcolor(10);
     drawSprite(&projectile->entity, projectile_sprite);

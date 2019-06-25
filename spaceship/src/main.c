@@ -73,11 +73,16 @@ int main(void)
 //    lcdWriteSymbol(96, buffer, 1, 1);
     lcd_push_buffer((uint8_t*) buffer);
 
+   // gotoxy(100,125);
+    //printf("Hello and Welcome to the cold and relentless outer space.\n You have been put in charge of piloting the only spaceship left in the defense of universe against the x.\n Your objective is to fly around and shoot down as many intruders as possible to help save us all.");
+    //printf("\n For further information glare upon the glorious lcd screen, controlled by the keyboard \n Good luck.");
+
+
 
     while(1){
-        while(nextScreen != 1){
-            navigator(&buffer);
-        }
+//        while(nextScreen != 1){
+//            navigator(&buffer);
+//        }
 
         if (t.hs >= 2) {
             updateGame();

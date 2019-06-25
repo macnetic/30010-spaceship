@@ -103,6 +103,22 @@ void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t
     player->triggerPressed = false;
 }
 
+//const static char enemy_sprite = {L_BK, F_BK, F_BK, H_BK,ESC, '[','2', B_MV, ESC, '[',U_MV, L_BK, ESC, '[','2', D_MV, ESC,'2', '[',B_MV, H_BK, F_BK, H_BK, '\0'};
+//
+//const static char powerup_sprite[3][40] = {
+//    {H_BK, L_BK, H_BK, ESC, '[', '3', B_MV, ESC, '[', D_MV, H_BK, ESC, '[', F_MV, H_BK,'\0'},
+//    {H_BK, L_BK, H_BK, ESC, '[', '3', B_MV, ESC, '[', D_MV, H_BK, ESC, '[', F_MV, H_BK,'\0'},
+//    {H_BK, L_BK, H_BK, ESC, '[', '3', B_MV, ESC, '[', D_MV, H_BK, ESC, '[', F_MV, H_BK,'\0'}
+//
+//};
+//
+//
+//const static char bomb_sprite = {ESC, '[', '2', U_MV, ESC, '[', '2', B_MV, L_BK, F_BK, ESC, '[', F_MV, F_BK,L_BK, ESC, '[', '6', B_MV, ESC, '[', D_MV,
+//                                 H_BK, H_BK, H_BK, L_BK, H_BK, H_BK, H_BK, ESC, '[', '6', B_MV, ESC, '[', D_MV,
+//                                 L_BK, F_BK, F_BK, F_BK, L_BK, '\0'
+//                                };
+
+
 /*
  * Function controlPlayer
  * ----------------------
