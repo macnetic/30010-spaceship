@@ -24,7 +24,7 @@
 #include <spaceship.h>
 #include <timer2.h>
 
-#define BAUD_RATE 921600
+#define BAUD_RATE 1382400
 
 int main(void)
 {
@@ -61,7 +61,7 @@ int main(void)
             navigator(&buffer);
         }
 
-        if (t.counter >= 5) {
+        if (t.hs >= 4) {
             updateGame();
             drawGame();
             t.counter = 0;
