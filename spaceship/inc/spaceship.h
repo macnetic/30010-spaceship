@@ -23,7 +23,7 @@
 #define MAX_PLAYERS 1
 #define MAX_ASTEROIDS 5
 #define MAX_ENEMIES 5
-#define MAX_PROJECTILES 2
+#define MAX_PROJECTILES 20
 #define MAX_POWERUPS 5
 
 #define GRAVITY_CONST 90
