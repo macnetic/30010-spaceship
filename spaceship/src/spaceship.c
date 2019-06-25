@@ -74,14 +74,14 @@ void initGame(void) {
     fgcolor(15);
     window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
 
-    spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 20, 0, 5, false);
+    spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 25, 0, 10, false);
 
     spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 10 << FIX_14_SHIFT, false);
     spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 10 << FIX_14_SHIFT, false);
 
-    spawnEnemy(&enemies[0], 100 << FIX_14_SHIFT, 50 << FIX_14_SHIFT, -1 << FIX_14_SHIFT, 0, 0, 0, false);
+    spawnEnemy(&enemies[0], 100 << FIX_14_SHIFT, 50 << FIX_14_SHIFT, 0 << FIX_14_SHIFT, 0, 0, 2, false);
 
-    spawnPowerup(&powerups[0], 50 << FIX_14_SHIFT, 50 << FIX_14_SHIFT, 1, false);
+    spawnPowerup(&powerups[0], 50 << FIX_14_SHIFT, 50 << FIX_14_SHIFT, 0, false);
 }
 
 /*
@@ -121,6 +121,13 @@ void updateGame(void) {
 
                 deleteProjectileSprite(&projectiles[i]);
                 deleteEntity(&projectiles[i].entity);
+
+                // If enemy dies, delete it, and increment score
+                if (enemies[j].hp <= 0) {
+                    // TODO Increment score
+                    deleteEnemySprite(&enemies[j]);
+                    deleteEntity(&enemies[j].entity);
+                }
             }
         }
 
@@ -154,6 +161,14 @@ void updateGame(void) {
             // Deal damage to the player and delete the projectile if hit
             if (detectHit(&powerups[i].entity, &players[j].entity) == true) {
                 // TODO Player picks up powerup
+                switch (powerups[i].type) {
+                    case 0: {
+                        players[j].ammo += 25;
+                        if (players[j].ammo > 25)
+                            players[j].ammo = 25;
+                        break;
+                    }
+                }
                 deletePowerupSprite(&powerups[i]);
                 deleteEntity(&powerups[i].entity);
             }
@@ -172,7 +187,7 @@ void updateGame(void) {
                 // Check if we can spawn a bullet, or if the game limit has been reached
                 // TODO: Take all this code and put it into a function
                 for (int16_t j = 0; j < MAX_PROJECTILES; j++) {
-                    if (projectiles[j].entity.isDeleted == true) {
+                    if ((projectiles[j].entity.isDeleted == true) && (players[i].ammo > 0)) {
                         int32_t x, y, vx, vy;
 
                         switch (players[i].heading) {
@@ -237,9 +252,9 @@ void updateGame(void) {
                         spawnProjectile(&projectiles[j],
                                         players[i].entity.x + x, players[i].entity.y + y,
                                         players[i].entity.vx + vx, players[i].entity.vy + vy,
-                                        10 << FIX_14_SHIFT, 1 << FIX_14_SHIFT);
+                                        10 << FIX_14_SHIFT, 1);
 
-
+                        players[i].ammo--;
                         set_led(0x02);
 
 
@@ -313,6 +328,10 @@ void drawGame(void) {
             drawPlayerSprite(&players[i]);
         }
     }
+
+    // Print elapsed game time
+    gotoxy(0, GAME_WINDOW_HEIGHT+2);
+    print_time();
 
     // Hide cursor away
     gotoxy(0,0);
