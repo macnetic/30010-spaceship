@@ -63,15 +63,17 @@ void screen_help(char buffer[]){
         memset(buffer, 0x00, 512/4 * 3); //Clear first three lines
         switch(helpPage){
             case 1:
-                lcdWriteString("This is page 1", buffer,0,0);
+                lcdWriteString("Use A and D to steer", buffer,0,0);
+                lcdWriteString("W propels the spaceship in it's current direction", buffer,1,0);
                 lcdWriteString("1",buffer,3,11);
                 break;
             case 2:
-                lcdWriteString("Next page is not page 3", buffer,0,0);
+                lcdWriteString("Press S to use the spacebrake", buffer,0,0);
+                lcdWriteString("The spacebrake slows down the ship", buffer,1,0);
                 lcdWriteString("2",buffer,3,11);
                 break;
             case 3:
-                lcdWriteString("I Lied!", buffer,0,0);
+                lcdWriteString("Space shoots bullets", buffer,0,0);
                 lcdWriteString("3",buffer,3,11);
                 break;
         }
