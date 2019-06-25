@@ -6,7 +6,7 @@
 
 // Placeholder values inserted
 #define ENEMY_HITBOX_WIDTH  4 << FIX_14_SHIFT
-#define ENEMY_HITBOX_HEIGHT 6 << FIX_14_SHIFT
+#define ENEMY_HITBOX_HEIGHT 3 << FIX_14_SHIFT
 
 /*
  * typedef struct Enemy Enemy
