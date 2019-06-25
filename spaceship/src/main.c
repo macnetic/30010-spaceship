@@ -61,7 +61,7 @@ int main(void)
             navigator(&buffer);
         }
 
-        if (t.hs >= 4) {
+        if (t.counter >= 4) {
             updateGame();
             drawGame();
             t.counter = 0;
