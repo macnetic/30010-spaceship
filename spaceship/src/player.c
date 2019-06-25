@@ -100,6 +100,7 @@ void spawnPlayer(Player* player, uint32_t x, uint32_t y, uint32_t mass, uint32_t
     player->mass = mass;
     player->ammo = ammo;
     player->heading = heading;
+    player->score = 0;
     player->hp = hp;
     player->triggerPressed = false;
 }
