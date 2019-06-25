@@ -32,7 +32,8 @@ void deleteEntity(Entity* ent) {
 
 /*
  * Function updateEntity
- * ---------------------
+ * ---------------------║                                                                                                 █▀█                                                                                                 ║
+
  * Updates the Entity position using the current velocity
  */
 void updateEntity(Entity* ent) {
