@@ -1,4 +1,5 @@
 #include <player.h>
+#include <spaceship.h>
 
 const static char player_sprite[8][40] = {
     {   // North
@@ -137,6 +138,15 @@ void controlPlayer(Player* player) {
     } else if (input == ' ') {
         // Set a flag to spawn a projectile shooting from this player
         player->triggerPressed = true;
+
+    } else if(input == 0x1B){ // minimize window
+        printf("%c[9;0t",ESC);
+
+    } else if (input == 0x0D){ // Maximize window and redraw window to continue playing
+        printf("%c[9;1t",ESC);
+        clrscr();
+        fgcolor(15);
+        window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
     }
 }
 

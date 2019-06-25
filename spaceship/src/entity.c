@@ -59,8 +59,10 @@ bool detectHit(Entity* ent_a, Entity * ent_b) {
     x_overlap = dx < ((ent_a->w + ent_b->w) >> 1);
     y_overlap = dy < ((ent_a->h + ent_b->h) >> 1);
 
-    if (x_overlap && y_overlap)
+    if (x_overlap && y_overlap){
+        set_led(0x03);
         return true;
+    }
     else
         return false;
 }

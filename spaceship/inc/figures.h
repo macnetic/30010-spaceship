@@ -12,7 +12,7 @@
 #define F_BK 0xDB
 
 #ifndef ESC
-    #define ESC 0x1B
+#define ESC 0x1B
 #endif // ESC
 
 // Terminal cursor movements

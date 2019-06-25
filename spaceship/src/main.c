@@ -47,8 +47,9 @@ int main(void)
 //
 //    TIM_Cmd(TIM3, ENABLE);
 
-    initGame();
 
+    init_led();
+    set_led(0x00);
     //clrscr();
     //gotoxy(1,1);
     char buffer [512];
@@ -72,10 +73,21 @@ int main(void)
 //    lcdWriteSymbol(95, buffer, 1, 0);
 //    lcdWriteSymbol(96, buffer, 1, 1);
     lcd_push_buffer((uint8_t*) buffer);
+    initGame();
 
-   // gotoxy(100,125);
-    //printf("Hello and Welcome to the cold and relentless outer space.\n You have been put in charge of piloting the only spaceship left in the defense of universe against the x.\n Your objective is to fly around and shoot down as many intruders as possible to help save us all.");
-    //printf("\n For further information glare upon the glorious lcd screen, controlled by the keyboard \n Good luck.");
+
+
+    gotoxy(50,10);
+    printf("Hello and Welcome to the cold and relentless outer space.\n");
+    printf("%c[49C",ESC);
+    printf("You have been put in charge of piloting the only spaceship left in the defense of universe against the x.\n");
+    printf("%c[49C",ESC);
+    printf("Your objective is to fly around and shoot down as many intruders as possible to help save us all.\n");
+    printf("%c[49C",ESC);
+    printf("For further information glare upon the glorious lcd screen, controlled by the keyboard \n");
+    printf("%c[49C",ESC);
+    printf("Good luck.");
+
 
 
 

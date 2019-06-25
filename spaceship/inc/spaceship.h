@@ -26,7 +26,7 @@
 #define MAX_PROJECTILES 2
 #define MAX_POWERUPS 5
 
-#define GRAVITY_CONST 67
+#define GRAVITY_CONST 90
 
 void initGame(void);
 void updateGame(void);

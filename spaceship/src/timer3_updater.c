@@ -15,7 +15,7 @@ void setup_timer(void) {
 }
 
 //Interups
-void TIM3_IRQHandler(void) {
-    //flag to set goes here
-    TIM3->SR &= ~0x0001; // Clear interrupt bit
-}
+//void TIM3_IRQHandler(void) {
+//    //flag to set goes here
+//    TIM3->SR &= ~0x0001; // Clear interrupt bit
+//}

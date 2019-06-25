@@ -238,7 +238,13 @@ void updateGame(void) {
                                         players[i].entity.vx + vx, players[i].entity.vy + vy,
                                         10 << FIX_14_SHIFT, 1 << FIX_14_SHIFT);
 
+
+                        set_led(0x02);
+
+
                         break;
+                    } else {
+                        set_led(0x00);
                     }
 
                 }
