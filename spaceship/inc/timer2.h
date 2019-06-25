@@ -10,7 +10,7 @@
 #define TIM2_RELOAD 63999 // Reload value for 100 Hz and prescale 40
 
 typedef struct Time{
-    uint8_t m, s, hs;
+    uint8_t m, s, hs, counter;
     uint16_t h;
 } Time;
 

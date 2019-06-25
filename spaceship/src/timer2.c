@@ -18,6 +18,7 @@ void setup_timer2(void) {
 
 void TIM2_IRQHandler(void) {
     t.hs += 1;
+    t.counter += 1;
 
     TIM2->SR &=~0x0001; // Clear interrupt bit
 }
@@ -34,7 +35,6 @@ void update_time(void) {
                 t.h += 1;
             }
         }
-        printf("%02d:%02d:%02d\n", t.h, t.m, t.s);
     }
 }
 
@@ -53,5 +53,8 @@ void reset_time(void) {
     t.hs = 0;
 }
 
+void print_time(void) {
+    printf("%02d:%02d:%02d\n", t.h, t.m, t.s);
+}
 
 /** PWM ***/

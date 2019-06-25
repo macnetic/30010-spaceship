@@ -12,6 +12,7 @@
 #include <projectile.h>
 #include <powerup.h>
 #include <ansi.h>
+#include <timer2.h>
 
 #define THRUST_STATE_ON  1
 #define THRUST_STATE_OFF 0
