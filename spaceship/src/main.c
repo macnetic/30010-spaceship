@@ -92,21 +92,18 @@ int main(void)
 
 
     while(1){
-<<<<<<< Updated upstream
         while(nextScreen != 1){
             navigator(&buffer);
         }
 
         if (t.hs >= 2) {
             clearAllSprites();
-=======
 
        while(nextScreen != 1){
             navigator(&buffer);
-                    }
 
+                    }
         if (t.hs >= 1) {
->>>>>>> Stashed changes
             updateGame();
             drawGame();
             t.hs = 0;

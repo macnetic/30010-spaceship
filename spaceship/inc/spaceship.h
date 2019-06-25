@@ -27,8 +27,6 @@
 #define MAX_POWERUPS 5
 
 #define GRAVITY_CONST 90
-<<<<<<< Updated upstream
-=======
 
 typedef struct Powerup {
     Entity entity;
