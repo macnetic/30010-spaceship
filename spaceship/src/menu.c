@@ -52,12 +52,12 @@ void screen_help(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
     lcdWriteString("(b)ack",buffer,3, 0);
-    lcdWriteString("/4",    buffer,3,12);
+    lcdWriteString("/5",    buffer,3,12);
     lcdWriteString("(n)ext",buffer,3,19);
 
     lcd_push_buffer((uint8_t*) buffer); //Update display
     uint8_t helpPage = 1;
-    uint8_t nPages = 4;
+    uint8_t nPages = 5;
 
     while(nextScreen == 3){
         memset(buffer, 0x00, 512/4 * 3); //Clear first three lines
@@ -84,6 +84,12 @@ void screen_help(char buffer[]){
                 lcdWriteString("Gravity causes your", buffer,1,0);
                 lcdWriteString("bullets to bend", buffer,2,0);
                 lcdWriteString("4",buffer,3,11);
+                break;
+            case 5:
+                lcdWriteString("Collect powerups bacause", buffer,0,0);
+                lcdWriteString("powerups are awesome!!", buffer,1,0);
+                lcdWriteString("*cool sunglasses emoji*", buffer,2,0);
+                lcdWriteString("5",buffer,3,11);
                 break;
         }
         lcd_push_buffer((uint8_t*)buffer); //Update display
