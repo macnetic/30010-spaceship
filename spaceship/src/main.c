@@ -59,7 +59,7 @@ int main(void)
 
         while(nextScreen != 1){
             navigator(&buffer);
-                    }
+        }
 
         if (t.counter >= 5) {
             updateGame();

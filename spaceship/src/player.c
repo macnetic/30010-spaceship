@@ -191,16 +191,16 @@ void thrustPlayer(Player* player) {
 void brakePlayer(Player* player) {
     //x direction
     if(player->entity.vx > 0){
-        player->entity.vx -= 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
+        player->entity.vx -= 2/2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
     }else if(player->entity.vx < 0){
-        player->entity.vx += 2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
+        player->entity.vx += 2/2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
     }
 
     //y direction
     if(player->entity.vy > 0){
-        player->entity.vy -= 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
+        player->entity.vy -= 1/2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
     }else if(player->entity.vy < 0){
-        player->entity.vy += 1 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
+        player->entity.vy += 1/2 << (FIX_14_SHIFT - PLAYER_VEL_SCALE);
     }
 }
 
