@@ -28,12 +28,6 @@
 
 #define GRAVITY_CONST 90
 
-typedef struct Powerup {
-    Entity entity;
-    // what kind of powerup?
-} Powerup;
->>>>>>> Stashed changes
-
 void initGame(void);
 void updateGame(void);
 void drawGame(void);
