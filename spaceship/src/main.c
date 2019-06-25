@@ -28,45 +28,21 @@
 
 int main(void)
 {
+    char buffer [512];
+
     extern Time t;
     setup_timer2();
     start_time();
 
     uart_init(BAUD_RATE);
-//    TIM_TimeBaseInitTypeDef TIM_TimeBaseStruct;
-//
-//    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-//
-//    TIM_TimeBaseStruct.TIM_Prescaler = 17;
-//    TIM_TimeBaseStruct.TIM_Period = 62754;
-//
-//    TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStruct);
-//
-//    NVIC_SetPriority(TIM3_IRQn, 0);
-//    NVIC_EnableIRQ(TIM3_IRQn);
-//
-//    TIM_Cmd(TIM3, ENABLE);
-
 
     init_led();
-    set_led(0x00);
-
-    char buffer [512];
 
     lcd_init();
-    memset(buffer, 0x00, 512);
-    lcd_push_buffer((uint8_t*) buffer);
 
-    char heart[] = {0x5f + 0x20, 0x60 + 0x20, '\0'};
-
-    lcdWriteString(heart, buffer, 0, 0);
-//    lcdWriteSymbol(95, buffer, 1, 0);
-//    lcdWriteSymbol(96, buffer, 1, 1);
-    lcd_push_buffer((uint8_t*) buffer);
     initGame();
 
-
-
+    // Start message
     gotoxy(50,10);
     printf("Hello and Welcome to the cold and relentless outer space.\n");
     printf("%c[49C",ESC);
@@ -78,19 +54,17 @@ int main(void)
     printf("%c[49C",ESC);
     printf("Good luck.");
 
-
-
-
     while(1){
+        update_time();
 
-       while(nextScreen != 1){
+        while(nextScreen != 1){
             navigator(&buffer);
                     }
 
-        if (t.hs >= 5) {
+        if (t.counter >= 5) {
             updateGame();
             drawGame();
-            t.hs = 0;
+            t.counter = 0;
         }
     }
 }
