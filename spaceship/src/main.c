@@ -75,9 +75,9 @@ int main(void)
 
 
     while(1){
-        while(nextScreen != 1){
-            navigator(&buffer);
-        }
+//        while(nextScreen != 1){
+//            navigator(&buffer);
+//        }
 
         if (t.hs >= 2) {
             updateGame();

@@ -10,9 +10,7 @@
 #include <enemy.h>
 #include <asteroid.h>
 #include <projectile.h>
-//#include <figures.h>
 #include <ansi.h>
-//#include <30010_io.h>
 
 #define THRUST_STATE_ON  1
 #define THRUST_STATE_OFF 0
@@ -24,10 +22,10 @@
 #define MAX_PLAYERS 1
 #define MAX_ASTEROIDS 5
 #define MAX_ENEMIES 5
-#define MAX_PROJECTILES 20
+#define MAX_PROJECTILES 2
 #define MAX_POWERUPS 5
 
-#define GRAVITY_CONST 667
+#define GRAVITY_CONST 67
 
 typedef struct Powerup {
     Entity entity;
