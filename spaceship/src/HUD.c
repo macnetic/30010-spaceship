@@ -19,7 +19,7 @@ void updateHUD(Player * player){
     }
 
     //Do something here
-    lcdWriteString("No powerups :(",buffer,3,0);
+    lcdWriteString("No powerups :(",buffer,2,0);
 
     //Show score
     lcdWriteString("Score: applesauce",buffer,3,0);
