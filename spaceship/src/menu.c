@@ -159,7 +159,7 @@ void screen_help(char buffer[]){
 void screen_stageSelect(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
-    lcdWriteString("Enter stage # 01-99",buffer,0,0);
+    lcdWriteString("Enter stage # 00-99",buffer,0,0);
     lcdWriteString("Stage:",buffer,1,0);
     lcdWriteString("(b)ack",buffer,3,0);
 
