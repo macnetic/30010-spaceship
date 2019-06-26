@@ -90,7 +90,7 @@ void initGame(void) {
     gotoxy(50,10);
     printf("Hello and Welcome to the cold and relentless outer space.\n");
     printf("%c[49C",ESC);
-    printf("You have been put in charge of piloting the only spaceship left in the defense of universe against the x.\n");
+    printf("You have been put in charge of piloting the only spaceship left in the defense of universe against the rebellion.\n");
     printf("%c[49C",ESC);
     printf("Your objective is to fly around and shoot down as many intruders as possible to help save us all.\n");
     printf("%c[49C",ESC);
@@ -366,8 +366,8 @@ void updateGame(void) {
         for (uint16_t i = 0; i < MAX_POWERUPS; i++) {
             if ((powerups[i].entity.isDeleted == true) && (powerupSpawned == false)) {
                 int32_t x, y, type;
-                x = rand() % (GAME_WINDOW_WIDTH - 4) + 2;
-                y = rand() % (GAME_WINDOW_HEIGHT - 4) + 2;
+                x = rand() % (GAME_WINDOW_WIDTH - 6) + 2;
+                y = rand() % (GAME_WINDOW_HEIGHT - 6) + 2;
                 type = rand() % 2;
                 spawnPowerup(&powerups[i], x << FIX_14_SHIFT, y << FIX_14_SHIFT, type, false);
                 powerupSpawned = true;

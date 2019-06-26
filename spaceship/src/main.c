@@ -51,7 +51,6 @@ int main(void)
 
         while(nextScreen != 1){
             navigator(&buffer);
-            srand(t.hs);
         }
 
         if (t.counter >= 5) {

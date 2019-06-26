@@ -7,6 +7,9 @@
 #include "menu.h"
 #define ESC 0x1B
 #include "spaceship.h";
+#include <timer2.h>
+
+extern Time t;
 
 //Screen navigation
 void navigator(char buffer[]){
@@ -39,7 +42,7 @@ void screen_main(char buffer[]){
 
     switch(input[0]){
         case '1':
-
+            srand(t.hs);
             nextScreen = 1;
             clrscr();
             fgcolor(15);
@@ -167,8 +170,12 @@ void screen_stageSelect(char buffer[]){
                         /*TODO:
                         Set flag to exit menu loop
                         for now, just output to putty*/
-                        printf("Game started\n");
+                        srand(n);
+                        clrscr();
+                        fgcolor(15);
+                        window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
                         cont = 0;
+                        nextScreen = 1;
                         break;
                     case 'n':
                         //Reset screen
