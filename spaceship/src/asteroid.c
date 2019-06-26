@@ -28,7 +28,7 @@ void spawnAsteroid(Asteroid* asteroid, uint32_t x, uint32_t y, uint32_t mass, bo
  * Draws an asteroid in the game.
  */
 void drawAsteroidSprite(Asteroid* asteroid) {
-    fgcolor(3);
+    fgcolor(8);
 
     gotoxy(asteroid->entity.x >> FIX_14_SHIFT, asteroid->entity.y >> FIX_14_SHIFT);
     printf(asteroid_sprite);

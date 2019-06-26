@@ -13,9 +13,9 @@ void spawnPowerup(Powerup* powerup, uint32_t x, uint32_t y, uint8_t type, bool i
 
 void drawPowerupSprite(Powerup* powerup) {
     switch (powerup->type) {
-        case 0: fgcolor(1); break;
+        case 0: fgcolor(4); break;
         case 1: fgcolor(2); break;
-        case 2: fgcolor(3); break;
+
     }
 
     drawSprite(&powerup->entity, powerup_sprite);

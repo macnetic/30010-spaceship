@@ -212,7 +212,7 @@ void brakePlayer(Player* player) {
  * player:   pointer to the Player instance to be drawn
  */
 void drawPlayerSprite(Player* player){
-    fgcolor(2);
+    fgcolor(15);
     drawSprite(&player->entity, player_sprite[player->heading]);
 }
 

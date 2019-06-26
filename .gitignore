@@ -6,3 +6,7 @@ spaceship/obj/
 *.elay
 
 *.depend
+
+spaceship/cscope\.out
+
+spaceship/spaceship\.cscope_file_list
