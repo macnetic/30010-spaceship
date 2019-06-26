@@ -87,11 +87,21 @@ void initGame(void) {
     // Draw window border
     fgcolor(15);
     window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
+    gotoxy(50,10);
+    printf("Hello and Welcome to the cold and relentless outer space.\n");
+    printf("%c[49C",ESC);
+    printf("You have been put in charge of piloting the only spaceship left in the defense of universe against the x.\n");
+    printf("%c[49C",ESC);
+    printf("Your objective is to fly around and shoot down as many intruders as possible to help save us all.\n");
+    printf("%c[49C",ESC);
+    printf("For further information glare upon the glorious LCD screen, controlled by the keyboard \n");
+    printf("%c[49C",ESC);
+    printf("Good luck.");
 
     spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 25, 0, PLAYER_MAX_HP, false);
 
-    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 1 << FIX_14_SHIFT, false);
-    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 3 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 2 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 6 << FIX_14_SHIFT, false);
 }
 
 /*

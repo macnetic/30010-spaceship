@@ -40,20 +40,11 @@ int main(void)
 
     lcd_init();
 
-    initGame();
+
 
     // Start message
-    gotoxy(50,10);
-    printf("Hello and Welcome to the cold and relentless outer space.\n");
-    printf("%c[49C",ESC);
-    printf("You have been put in charge of piloting the only spaceship left in the defense of universe against the x.\n");
-    printf("%c[49C",ESC);
-    printf("Your objective is to fly around and shoot down as many intruders as possible to help save us all.\n");
-    printf("%c[49C",ESC);
-    printf("For further information glare upon the glorious LCD screen, controlled by the keyboard \n");
-    printf("%c[49C",ESC);
-    printf("Good luck.");
 
+    initGame();
     // Game loop
     while(1){
         update_time();

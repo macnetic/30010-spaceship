@@ -6,6 +6,7 @@
 #include "charset.h"
 #include "menu.h"
 #define ESC 0x1B
+#include "spaceship.h";
 
 //Screen navigation
 void navigator(char buffer[]){
@@ -35,9 +36,14 @@ void screen_main(char buffer[]){
 
     read_chars(input,1); //Wait for input for next screen
 
+
     switch(input[0]){
         case '1':
+
             nextScreen = 1;
+            clrscr();
+            fgcolor(15);
+            window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
             break;
         case '2':
             nextScreen = 2;
