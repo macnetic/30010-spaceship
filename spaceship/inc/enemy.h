@@ -8,6 +8,9 @@
 #define ENEMY_HITBOX_WIDTH  4 << FIX_14_SHIFT
 #define ENEMY_HITBOX_HEIGHT 3 << FIX_14_SHIFT
 
+#define ENEMY_START_HP 3
+#define ENEMY_KILL_SCORE 10
+
 /*
  * typedef struct Enemy Enemy
  * --------------------------

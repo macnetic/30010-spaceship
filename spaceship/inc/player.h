@@ -13,9 +13,11 @@
 // Player constants
 #define PLAYER_HITBOX_WIDTH 6 << FIX_14_SHIFT
 #define PLAYER_HITBOX_HEIGHT 4 << FIX_14_SHIFT
-#define PLAYER_VEL_SCALE 4
+#define PLAYER_VEL_SCALE 3
 #define PLAYER_MAX_X_VEL 2
 #define PLAYER_MAX_Y_VEL 1
+
+#define PLAYER_MAX_HP 10
 
 /*
  * typedef struct Player Player

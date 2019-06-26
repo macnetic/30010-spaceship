@@ -54,18 +54,31 @@ int main(void)
     printf("%c[49C",ESC);
     printf("Good luck.");
 
+    // Game loop
     while(1){
         update_time();
 
         while(nextScreen != 1){
             navigator(&buffer);
+            srand(t.hs);
         }
 
-        if (t.counter >= 4) {
+        if (t.counter >= 5) {
             updateGame();
             drawGame();
             t.counter = 0;
             //TODO: Exit loop when dead
+
+            if (isGameOver() == true) {
+                break;
+            }
         }
     }
+
+    clrscr();
+    gotoxy(50, 10);
+    uint32_t score = getScore();
+    printf("GAME OVER.\tScore: %-5lu", score);
+
+    while(1);
 }

@@ -14,15 +14,14 @@ void updateHUD(Player * player){
     }
 
     //How much ammo the player has left
-    for(i = 0; i < (*player).ammo; i++){
+    for(i = 0; i < player->ammo; i++){
         lcdWriteSymbol(97,buffer,1,i);
     }
 
-    //Do something here
-    lcdWriteString("No powerups :(",buffer,2,0);
-
     //Show score
-    lcdWriteString("Score: applesauce",buffer,3,0);
+    char score_str[13];
+    sprintf(score_str, "Score: %-5lu", player->score);
+    lcdWriteString(score_str,buffer,2,0);
 
     //Update display
     lcd_push_buffer(buffer);

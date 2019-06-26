@@ -7,7 +7,21 @@ static Asteroid asteroids[MAX_ASTEROIDS];
 static Projectile projectiles[MAX_PROJECTILES];
 static Powerup powerups[MAX_POWERUPS];
 
+bool gameOver = false;
+bool enemySpawned = true;
+bool powerupSpawned = true;
+
+extern Time t;
+
 /** Helper functions **/
+bool isGameOver(void) {
+    return gameOver;
+}
+
+uint32_t getScore(void) {
+    return players[0].score;
+}
+
 
 /*
  * Function clearEntities
@@ -74,14 +88,10 @@ void initGame(void) {
     fgcolor(15);
     window(1, 1, GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT, "", 1);
 
-    spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 25, 0, 10, false);
+    spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 25, 0, PLAYER_MAX_HP, false);
 
-    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 10 << FIX_14_SHIFT, false);
-    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 10 << FIX_14_SHIFT, false);
-
-    spawnEnemy(&enemies[0], 100 << FIX_14_SHIFT, 50 << FIX_14_SHIFT, 0 << FIX_14_SHIFT, 0, 0, 2, false);
-
-    spawnPowerup(&powerups[0], 50 << FIX_14_SHIFT, 50 << FIX_14_SHIFT, 0, false);
+    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 1 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 3 << FIX_14_SHIFT, false);
 }
 
 /*
@@ -101,12 +111,18 @@ void updateGame(void) {
             // Skip deleted entities
             if (players[j].entity.isDeleted == true) continue;
 
-            // Deal damage to the player and delete the projectile if hit
+            // Deal damage to the player and delete the projectile if hit.
+            // If the player is dead, flag it and return from function
             if (detectHit(&projectiles[i].entity, &players[j].entity) == true) {
                 players[j].hp -= projectiles[i].damage;
 
                 deleteProjectileSprite(&projectiles[i]);
                 deleteEntity(&projectiles[i].entity);
+
+                if (players[j].hp <= 0) {
+                    gameOver = true;
+                    return;
+                }
             }
         }
 
@@ -125,6 +141,7 @@ void updateGame(void) {
                 // If enemy dies, delete it, and increment score
                 if (enemies[j].hp <= 0) {
                     // TODO Increment score
+                    players[0].score += ENEMY_KILL_SCORE;
                     deleteEnemySprite(&enemies[j]);
                     deleteEntity(&enemies[j].entity);
                 }
@@ -162,12 +179,18 @@ void updateGame(void) {
             if (detectHit(&powerups[i].entity, &players[j].entity) == true) {
                 // TODO Player picks up powerup
                 switch (powerups[i].type) {
-                    case 0: {
-                        players[j].ammo += 25;
-                        if (players[j].ammo > 25)
-                            players[j].ammo = 25;
-                        break;
-                    }
+                case 0: {
+                    players[j].ammo += 25;
+                    if (players[j].ammo > 25)
+                        players[j].ammo = 25;
+                    break;
+                }
+                case 1: {
+                    players[j].hp += 5;
+                    if (players[j].hp > PLAYER_MAX_HP)
+                        players[j].hp = PLAYER_MAX_HP;
+                    break;
+                }
                 }
                 deletePowerupSprite(&powerups[i]);
                 deleteEntity(&powerups[i].entity);
@@ -275,6 +298,11 @@ void updateGame(void) {
     for (uint16_t i = 0; i < MAX_ENEMIES; i++) {
         if (enemies[i].entity.isDeleted == false) {
             updateEntity(&enemies[i].entity);
+
+            // Delete enemy if out of bounds
+            if (detectBoundaryBox(&enemies[i].entity, 2, 2, GAME_WINDOW_WIDTH - 2, GAME_WINDOW_HEIGHT - 1) != 0) {
+                enemies[i].entity.isDeleted = true;
+            }
         }
     }
 
@@ -295,6 +323,38 @@ void updateGame(void) {
             updateEntity(&players[i].entity);
             keepPlayerInBounds(&players[i], 3, 2, GAME_WINDOW_WIDTH - 3, GAME_WINDOW_HEIGHT - 1);
         }
+    }
+
+    if (t.s % 3 == 0) {
+        for (uint16_t i = 0; i < MAX_ENEMIES; i++) {
+            if ((enemies[i].entity.isDeleted == true) && (enemySpawned == false)) {
+                int32_t x, y;
+                x = (GAME_WINDOW_WIDTH - 6);
+                y = rand() % (GAME_WINDOW_HEIGHT - 4) + 2;
+                spawnEnemy(&enemies[i], x << FIX_14_SHIFT, y << FIX_14_SHIFT, -1 << FIX_14_SHIFT, 0, 0, ENEMY_START_HP, false);
+                enemySpawned = true;
+                break;
+            }
+        }
+    } else {
+        enemySpawned = false;
+    }
+
+
+    if (t.s % 10 == 0) {
+        for (uint16_t i = 0; i < MAX_POWERUPS; i++) {
+            if ((powerups[i].entity.isDeleted == true) && (powerupSpawned == false)) {
+                int32_t x, y, type;
+                x = rand() % (GAME_WINDOW_WIDTH - 4) + 2;
+                y = rand() % (GAME_WINDOW_HEIGHT - 4) + 2;
+                type = rand() % 2;
+                spawnPowerup(&powerups[i], x << FIX_14_SHIFT, y << FIX_14_SHIFT, type, false);
+                powerupSpawned = true;
+                break;
+            }
+        }
+    } else {
+        powerupSpawned = false;
     }
 }
 
@@ -331,6 +391,7 @@ void drawGame(void) {
 
     // Print elapsed game time
     gotoxy(0, GAME_WINDOW_HEIGHT+2);
+    fgcolor(15);
     print_time();
 
     // Hide cursor away

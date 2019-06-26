@@ -33,6 +33,8 @@ void initGame(void);
 void updateGame(void);
 void drawGame(void);
 void clearAllSprites(void);
+uint32_t getScore(void);
+bool isGameOver(void);
 
 //void gravity(void); // TODO
 
