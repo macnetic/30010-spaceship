@@ -303,6 +303,17 @@ void updateGame(void) {
             if (detectBoundaryBox(&enemies[i].entity, 2, 2, GAME_WINDOW_WIDTH - 2, GAME_WINDOW_HEIGHT - 1) != 0) {
                 enemies[i].entity.isDeleted = true;
             }
+
+            if ((rand() % 1000) < 25) {
+                for (int16_t j = 0; j < MAX_PROJECTILES; j++) {
+                    if (projectiles[j].entity.isDeleted == true) {
+                        spawnProjectile(&projectiles[j],
+                                        enemies[i].entity.x - (3 << FIX_14_SHIFT), enemies[i].entity.y,
+                                        enemies[i].entity.vx - (1 << FIX_14_SHIFT), enemies[i].entity.vy, 1 << FIX_14_SHIFT, 1);
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -325,13 +336,13 @@ void updateGame(void) {
         }
     }
 
-    if (t.s % 3 == 0) {
+    if (t.s % 4 == 0) {
         for (uint16_t i = 0; i < MAX_ENEMIES; i++) {
             if ((enemies[i].entity.isDeleted == true) && (enemySpawned == false)) {
                 int32_t x, y;
                 x = (GAME_WINDOW_WIDTH - 6);
                 y = rand() % (GAME_WINDOW_HEIGHT - 4) + 2;
-                spawnEnemy(&enemies[i], x << FIX_14_SHIFT, y << FIX_14_SHIFT, -1 << FIX_14_SHIFT, 0, 0, ENEMY_START_HP, false);
+                spawnEnemy(&enemies[i], x << FIX_14_SHIFT, y << FIX_14_SHIFT, -1 << (FIX_14_SHIFT-1), 0, 0, ENEMY_START_HP, false);
                 enemySpawned = true;
                 break;
             }
