@@ -21,8 +21,8 @@ void updateHUD(Player * player){
     //Show score
     char score_str[13];
     sprintf(score_str, "Score: %-5lu", player->score);
-    lcdWriteString(score_str,buffer,2,0);
+    lcdWriteString(score_str,buffer,3,0);
 
     //Update display
-    lcd_push_buffer(buffer);
+    lcd_push_buffer((uint8_t*)buffer);
 }

@@ -57,7 +57,6 @@ int main(void)
             updateGame();
             drawGame();
             t.counter = 0;
-            //TODO: Exit loop when dead
 
             if (isGameOver() == true) {
                 break;

@@ -6,7 +6,7 @@
 #include "charset.h"
 #include "menu.h"
 #define ESC 0x1B
-#include "spaceship.h";
+#include "spaceship.h"
 #include <timer2.h>
 
 extern Time t;
@@ -30,10 +30,10 @@ void navigator(char buffer[]){
 void screen_main(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
-    lcdWriteString("(1) Start game",    buffer,0,0);
-    lcdWriteString("(2) Select stage",  buffer,1,0);
-    lcdWriteString("(3) Help",          buffer,2,0);
-    lcdWriteString("(4) Let's dance!",  buffer,3,0);
+    lcdWriteString("-----KESSLER SYNDROME-----",buffer,0,0);
+    lcdWriteString("(1) Start game",            buffer,1,0);
+    lcdWriteString("(2) Select stage",          buffer,2,0);
+    lcdWriteString("(3) Help",                  buffer,3,0);
 
     lcd_push_buffer((uint8_t*)buffer); //Update display
 
@@ -61,12 +61,12 @@ void screen_help(char buffer[]){
     memset(buffer, 0x00, 512); //Clear screen
 
     lcdWriteString("(b)ack",buffer,3, 0);
-    lcdWriteString("/5",    buffer,3,12);
+    lcdWriteString("/9",    buffer,3,12);
     lcdWriteString("(n)ext",buffer,3,19);
 
     lcd_push_buffer((uint8_t*) buffer); //Update display
     uint8_t helpPage = 1;
-    uint8_t nPages = 5;
+    uint8_t nPages = 9;
 
     while(nextScreen == 3){
         memset(buffer, 0x00, 512/4 * 3); //Clear first three lines
@@ -89,16 +89,37 @@ void screen_help(char buffer[]){
                 lcdWriteString("3",buffer,3,11);
                 break;
             case 4:
-                lcdWriteString("Astroids have gravity", buffer,0,0);
-                lcdWriteString("Gravity causes your", buffer,1,0);
-                lcdWriteString("bullets to bend", buffer,2,0);
+                lcdWriteString("Bullets can also kill you", buffer,0,0);
+                lcdWriteString("Watch out for that!", buffer,1,0);
                 lcdWriteString("4",buffer,3,11);
                 break;
             case 5:
-                lcdWriteString("Collect powerups bacause", buffer,0,0);
-                lcdWriteString("powerups are awesome!!", buffer,1,0);
-                lcdWriteString("*cool sunglasses emoji*", buffer,2,0);
+                lcdWriteString("Astroids have gravity", buffer,0,0);
+                lcdWriteString("Gravity causes your", buffer,1,0);
+                lcdWriteString("bullets to bend", buffer,2,0);
                 lcdWriteString("5",buffer,3,11);
+                break;
+            case 6:
+                lcdWriteString("Green powerups give", buffer,0,0);
+                lcdWriteString("health", buffer,1,0);
+                lcdWriteString("Blue powerups give ammo", buffer,2,0);
+                lcdWriteString("6",buffer,3,11);
+                break;
+            case 7:
+                lcdWriteString("The LCD screen tells you", buffer,0,0);
+                lcdWriteString("how much HP and ammo you", buffer,1,0);
+                lcdWriteString("have left", buffer,2,0);
+                lcdWriteString("7",buffer,3,11);
+                break;
+            case 8:
+                lcdWriteString("Kill enemies to gain score", buffer,0,0);
+                lcdWriteString("Score is love,", buffer,1,0);
+                lcdWriteString("Score is life.", buffer,2,0);
+                lcdWriteString("8",buffer,3,11);
+                break;
+            case 9:
+                lcdWriteString("Good luck pilot", buffer,0,0);
+                lcdWriteString("9",buffer,3,11);
                 break;
         }
         lcd_push_buffer((uint8_t*)buffer); //Update display
@@ -107,6 +128,7 @@ void screen_help(char buffer[]){
 
         switch(input[0]){
             case 'b':
+            case 'B':
                 if(helpPage == 1){
                     nextScreen = 0;
                 }else{
@@ -117,6 +139,7 @@ void screen_help(char buffer[]){
                 }
                 break;
             case 'n':
+            case 'N':
                 if(helpPage < nPages){
                     helpPage++;
                     if(helpPage == nPages){
@@ -125,6 +148,7 @@ void screen_help(char buffer[]){
                 }
                 break;
             case 'm':
+            case 'M':
                 if(helpPage == nPages){
                     nextScreen = 0;
                 }
@@ -146,7 +170,7 @@ void screen_stageSelect(char buffer[]){
     n = 0;
     while(i < 2){ //Get max two digits
         read_chars(input,1);
-        if(input[0] == 'b'){
+        if(input[0] == 'b' || input[0] == 'B'){
             //If player presses b, cancel out and go back to main menu
             nextScreen = 0;
             break;
@@ -167,9 +191,8 @@ void screen_stageSelect(char buffer[]){
                 read_chars(input,1);
                 switch(input[0]){
                     case 'y':
-                        /*TODO:
-                        Set flag to exit menu loop
-                        for now, just output to putty*/
+                    case 'Y':
+                        //Start game with selected stage
                         srand(n);
                         clrscr();
                         fgcolor(15);
@@ -178,10 +201,12 @@ void screen_stageSelect(char buffer[]){
                         nextScreen = 1;
                         break;
                     case 'n':
+                    case 'N':
                         //Reset screen
                         cont = 0;
                         break;
                     case 'b':
+                    case 'B':
                         //Go back to main menu
                         nextScreen = 0;
                         cont = 0;
