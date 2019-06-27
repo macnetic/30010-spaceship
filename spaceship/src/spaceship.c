@@ -100,8 +100,10 @@ void initGame(void) {
 
     spawnPlayer(&players[0], 100 << FIX_14_SHIFT, 32 << FIX_14_SHIFT, 0, 25, 0, PLAYER_MAX_HP, false);
 
-    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 2 << FIX_14_SHIFT, false);
-    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 40 << FIX_14_SHIFT, 6 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[0], 50 << FIX_14_SHIFT, 25 << FIX_14_SHIFT, 1 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[1], 100 << FIX_14_SHIFT, 45 << FIX_14_SHIFT, 4 << FIX_14_SHIFT, false);
+    spawnAsteroid(&asteroids[2], 150 << FIX_14_SHIFT, 15 << FIX_14_SHIFT, 2 << FIX_14_SHIFT, false);
+
 }
 
 /*
@@ -154,6 +156,7 @@ void updateGame(void) {
                     players[0].score += ENEMY_KILL_SCORE;
                     deleteEnemySprite(&enemies[j]);
                     deleteEntity(&enemies[j].entity);
+                    set_led(0x02);
                 }
             }
         }
@@ -288,12 +291,12 @@ void updateGame(void) {
                                         10 << FIX_14_SHIFT, 1);
 
                         players[i].ammo--;
-                        set_led(0x02);
+
 
 
                         break;
                     } else {
-                        set_led(0x00);
+                        set_led(0x04); // turns blue if maximum amount of projectiles is on the screen
                     }
 
                 }
@@ -346,7 +349,7 @@ void updateGame(void) {
         }
     }
 
-    if (t.s % 4 == 0) {
+    if (t.s % 8 == 0) {
         for (uint16_t i = 0; i < MAX_ENEMIES; i++) {
             if ((enemies[i].entity.isDeleted == true) && (enemySpawned == false)) {
                 int32_t x, y;

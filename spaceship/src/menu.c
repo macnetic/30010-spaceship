@@ -83,7 +83,7 @@ void screen_help(char buffer[]){
                 lcdWriteString("2",buffer,3,11);
                 break;
             case 3:
-                lcdWriteString("Space shoots bullets", buffer,0,0);
+                lcdWriteString("Spacebar shoots bullets", buffer,0,0);
                 lcdWriteString("Hit red enemies with", buffer,1,0);
                 lcdWriteString("bullets to kill them", buffer,2,0);
                 lcdWriteString("3",buffer,3,11);
@@ -94,7 +94,7 @@ void screen_help(char buffer[]){
                 lcdWriteString("4",buffer,3,11);
                 break;
             case 5:
-                lcdWriteString("Astroids have gravity", buffer,0,0);
+                lcdWriteString("Asteroids have gravity", buffer,0,0);
                 lcdWriteString("Gravity causes your", buffer,1,0);
                 lcdWriteString("bullets to bend", buffer,2,0);
                 lcdWriteString("5",buffer,3,11);

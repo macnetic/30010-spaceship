@@ -1,6 +1,7 @@
 #include <player.h>
 #include <spaceship.h>
 
+// Drawing the spaceship depending on heading
 const static char player_sprite[8][40] = {
     {   // North
         ESC, '[' ,'2', U_MV, L_BK, ESC, '[', D_MV, ESC, '[', B_MV, F_BK, ESC,  '[', D_MV, ESC,

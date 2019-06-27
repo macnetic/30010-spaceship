@@ -16,7 +16,6 @@
 #include <stdint.h>
 #include "30010_io.h"
 #include "ansi.h"
-//#include "sound_driver.h"
 #include "trig_lut.h"
 #include "lcd_driver.h"
 #include <wchar.h>
@@ -24,7 +23,7 @@
 #include <spaceship.h>
 #include <timer2.h>
 
-#define BAUD_RATE 1382400
+#define BAUD_RATE 1328400
 
 int main(void)
 {
@@ -53,7 +52,7 @@ int main(void)
             navigator(&buffer);
         }
 
-        if (t.counter >= 5) {
+        if (t.counter >= 4) {
             updateGame();
             drawGame();
             t.counter = 0;

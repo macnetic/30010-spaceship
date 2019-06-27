@@ -22,7 +22,6 @@
 #define B_MV 0x44
 
 void drawAsteroid(int x, int y);
-//void drawPlayer(Player* player);
 uint8_t rotateSpaceship(void);
 
 #endif /* _FIGURES_H_*/
